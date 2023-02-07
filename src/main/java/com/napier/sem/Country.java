@@ -7,5 +7,5 @@ public class Country {
     public String Continent;
     public String Region;
     public int Population;
-    public int Capital;
+    public City Capital;
 }
