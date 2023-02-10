@@ -6,4 +6,6 @@
 - Release [![Releases](https://img.shields.io/github/release/MelissaAstbury/SEMPopulationInformation.svg?style=flat-square)](https://github.com/MelissaAstbury/SEMPopulationInformation/releases)
 
 
-this is a test 
+# Code of conduct
+
+Here go the rules of the code of conduct
