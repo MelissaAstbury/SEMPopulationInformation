@@ -15,7 +15,7 @@ This Code of Conduct defines how each member of the Group 2 must act when workin
 2. Welcome constructive criticism. 
 3. Focus on what is best for the group. 
 4. Encourage teamwork, helping other group members when they need it. 
-5. Show empathy for other group members.
+5. Share your knowledge and experience with other group members.
 
 **Examples of unacceptable behavior include:**
 1. Making offensive comments toward other group members. Such comments may be sexual, religious, or racial. 
