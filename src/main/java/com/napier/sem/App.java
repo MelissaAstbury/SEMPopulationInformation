@@ -15,12 +15,15 @@ public class App
 
         // Extract employee salary information
         ArrayList<Country> countries = a.getCountries();
+        ArrayList<Country> countriesInAContinent = a.getCountriesInAContinent();
 
         // Test the size of the returned data - should be 240124
         System.out.println(countries.size());
+        System.out.println(countriesInAContinent.size());
 
         // Display
         a.printCountries(countries);
+        a.printCountriesInAContinent(countriesInAContinent);
 
         // Disconnect from database
         a.disconnect();
@@ -143,6 +146,65 @@ public class App
         System.out.println(String.format("%-10s %-50s %-30s %-30s %-20s %-30s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
         // Loop over all countries in the list
         for (Country country : countries)
+        {
+            String country_string =
+                    String.format("%-10s %-50s %-30s %-30s %-20s %-30s",
+                            country.Code, country.Name, country.Continent, country.Region, country.Population, country.Capital.Name);
+            System.out.println(country_string);
+        }
+    }
+
+    /**
+     * Gets all the countries in a continent
+     * @return A list of all countries.
+     */
+    public ArrayList<Country> getCountriesInAContinent()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create SQL statement
+            String query =
+                    "SELECT * "
+                            + "FROM countries "
+                            + "WHERE continent = Europe"
+                            + "ORDER BY country.Population DESC";
+            // Execute SQL statement
+            ResultSet result = stmt.executeQuery(query);
+            // Extract country information
+            ArrayList<Country> countries = new ArrayList<>();
+            while (result.next())
+            {
+                Country country = new Country();
+                country.Code = result.getString("Code");
+                country.Name = result.getString("Name");
+                country.Continent = result.getString("Continent");
+                country.Region = result.getString("Region");
+                country.Population = result.getInt("Population");
+                country.Capital.Name = result.getString("Capital");
+                countries.add(country);
+            }
+            return countries;
+        }
+        catch (Exception exception)
+        {
+            System.out.println(exception.getMessage());
+            System.out.println("Failed to retrieve countries from a continent");
+            return null;
+        }
+    }
+
+    /**
+     * Prints a list of countriesInAContinent.
+     * @param countriesInAContinent The list of countries to print.
+     */
+    public void printCountriesInAContinent(ArrayList<Country> countriesInAContinent)
+    {
+        // Print header
+        System.out.println(String.format("%-10s %-50s %-30s %-30s %-20s %-30s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
+        // Loop over all countries in the list
+        for (Country country : countriesInAContinent)
         {
             String country_string =
                     String.format("%-10s %-50s %-30s %-30s %-20s %-30s",
