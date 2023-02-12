@@ -13,13 +13,12 @@ public class App
         // Connect to database
         a.connect();
 
-        // Extract employee salary information
+        // Extract country information
         ArrayList<Country> countries = a.getCountries();
         ArrayList<Country> countriesInAContinent = a.getCountriesInAContinent();
 
         // Test the size of the returned data - should be 240124
         System.out.println(countries.size());
-        System.out.println(countriesInAContinent.size());
 
         // Display
         a.printCountries(countries);
@@ -166,9 +165,9 @@ public class App
             Statement stmt = con.createStatement();
             // Create SQL statement
             String query =
-                    "SELECT * "
-                            + "FROM countries "
-                            + "WHERE continent = Europe"
+                    "SELECT country.Code, country.Name, country.Continent, country.Region, country.Population, city.Name as Capital "
+                            + "FROM country, city "
+                            + "WHERE country.Continent='Europe' "
                             + "ORDER BY country.Population DESC";
             // Execute SQL statement
             ResultSet result = stmt.executeQuery(query);
@@ -177,6 +176,7 @@ public class App
             while (result.next())
             {
                 Country country = new Country();
+                country.Capital = new City();
                 country.Code = result.getString("Code");
                 country.Name = result.getString("Name");
                 country.Continent = result.getString("Continent");
@@ -203,6 +203,7 @@ public class App
     {
         // Print header
         System.out.println(String.format("%-10s %-50s %-30s %-30s %-20s %-30s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
+        // Code, Name, Continent, Region, Population and Capital.
         // Loop over all countries in the list
         for (Country country : countriesInAContinent)
         {
