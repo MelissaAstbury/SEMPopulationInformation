@@ -1,24 +1,27 @@
 @startuml
 
-actor Role as "Role"
-top to bottom direction
+actor User as "User"
 rectangle Database
-
 
 rectangle "World System" {
     usecase UC1 as "Get world countries
     sorted by population"
-    usecase UC2 as "Get continent countries
+    usecase UC2 as "Get countries of a continent
+    sorted by population"
+    usecase UC3 as "Get countries of a region
     sorted by population"
 
     usecase UC1a as "Print report"
 
-    Role -> UC1
-    Role -> UC2
+    User -> UC1
+    User -> UC2
+    User -> UC3
     UC1 ..> UC1a : include
     UC2 ..> UC1a : include
+    UC3 ..> UC1a : include
     UC1 - Database
     UC2 - Database
+    UC3 - Database
 }
 
 @enduml
