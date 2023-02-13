@@ -51,7 +51,7 @@ public class CityReporting {
         catch (Exception e)
         {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get country details");
+            System.out.println("Failed to get city details");
             return null;
         }
     }
@@ -67,10 +67,10 @@ public class CityReporting {
         // Loop over all countries in the list
         for (City city : cities)
         {
-            String country_string =
+            String city_string =
                     String.format("%-50s %-50s %-50s %-20s",
                             city.Name, city.Country.Name, city.District, city.Population);
-            System.out.println(country_string);
+            System.out.println(city_string);
         }
     }
 }
