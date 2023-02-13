@@ -10,6 +10,8 @@ import static com.napier.sem.App.con;
 public class CountryReporting {
     public void RunSamples(){
 
+        System.out.println("Country Reporting");
+
         // Report 01 - Countries by population
         System.out.println("Report 01 - Countries by population");
         System.out.println("Parameters: None");
