@@ -168,6 +168,7 @@ public class App
                     "SELECT country.Code, country.Name, country.Continent, country.Region, country.Population, city.Name as Capital "
                             + "FROM country, city "
                             + "WHERE country.Continent='Europe' "
+                            + "AND country.Capital = city.ID "
                             + "ORDER BY country.Population DESC";
             // Execute SQL statement
             ResultSet result = stmt.executeQuery(query);
