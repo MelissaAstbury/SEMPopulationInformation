@@ -103,9 +103,10 @@ public class App
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT Code, Name, Continent, Population "
-                            + "FROM country "
-                            + "ORDER BY Population DESC";
+                    "SELECT country.Code, country.Name, country.Continent, country.Region, country.Population, city.Name as Capital "
+                            + "FROM country, city "
+                            + "WHERE country.capital = city.ID";
+                            //+ "ORDER BY country.Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract country information
@@ -113,10 +114,13 @@ public class App
             while (rset.next())
             {
                 Country country = new Country();
+                country.Capital = new City();
                 country.Code = rset.getString("Code");
                 country.Name = rset.getString("Name");
                 country.Continent = rset.getString("Continent");
+                country.Region = rset.getString("Region");
                 country.Population = rset.getInt("Population");
+                country.Capital.Name = rset.getString("Capital");
                 countries.add(country);
             }
             return countries;
@@ -136,13 +140,13 @@ public class App
     public void printCountries(ArrayList<Country> countries)
     {
         // Print header
-        System.out.println(String.format("%-10s %-30s %-30s %-20s", "Code", "Name", "Continent", "Population"));
+        System.out.println(String.format("%-10s %-50s %-30s %-30s %-20s %-30s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
         // Loop over all countries in the list
         for (Country country : countries)
         {
             String country_string =
-                    String.format("%-10s %-30s %-30s %-20s",
-                            country.Code, country.Name, country.Continent, country.Population);
+                    String.format("%-10s %-50s %-30s %-30s %-20s %-30s",
+                            country.Code, country.Name, country.Continent, country.Region, country.Population, country.Capital.Name);
             System.out.println(country_string);
         }
     }
