@@ -25,6 +25,13 @@ public class CountryReporting {
         ArrayList<Country> countries02 = new ArrayList<Country>();
         countries02 = getCountriesForRegion("Eastern Asia");
         printCountries(countries02);
+
+        // Report 03 - Countries by continent
+        System.out.println("Report 03 - Countries within a continent by population");
+        System.out.println("Parameters: Continent='Europe'");
+        ArrayList<Country> countries03;
+        countries03 = getCountriesInAContinent("Europe");
+        printCountries(countries03);
     }
 
     public ArrayList<Country> getCountriesByPopulation()
@@ -106,6 +113,46 @@ public class CountryReporting {
             return null;
         }
     }
+
+    public ArrayList<Country> getCountriesInAContinent(String continent)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create SQL statement
+            String query =
+                    "SELECT country.Code, country.Name, country.Continent, country.Region, country.Population, city.Name as Capital "
+                            + "FROM country, city "
+                            + "WHERE country.Continent = '" + continent + "' "
+                            + "AND country.Capital = city.ID "
+                            + "ORDER BY country.Population DESC";
+            // Execute SQL statement
+            ResultSet result = stmt.executeQuery(query);
+            // Extract country information
+            ArrayList<Country> countries = new ArrayList<>();
+            while (result.next())
+            {
+                Country country = new Country();
+                country.Capital = new City();
+                country.Code = result.getString("Code");
+                country.Name = result.getString("Name");
+                country.Continent = result.getString("Continent");
+                country.Region = result.getString("Region");
+                country.Population = result.getInt("Population");
+                country.Capital.Name = result.getString("Capital");
+                countries.add(country);
+            }
+            return countries;
+        }
+        catch (Exception exception)
+        {
+            System.out.println(exception.getMessage());
+            System.out.println("Failed to retrieve countries from a continent");
+            return null;
+        }
+    }
+
     /**
      * Prints a list of countries.
      * @param countries The list of countries to print.
