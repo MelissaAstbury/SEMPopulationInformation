@@ -13,14 +13,8 @@ public class App
         // Connect to database
         a.connect();
 
-        // Extract employee salary information
-        ArrayList<Country> countries = a.getCountries();
-
-        // Test the size of the returned data - should be 240124
-        System.out.println(countries.size());
-
-        // Display
-        a.printCountries(countries);
+        SampleReporting sampleReporting = new SampleReporting();
+        sampleReporting.RunSamples();
 
         // Disconnect from database
         a.disconnect();
@@ -29,7 +23,7 @@ public class App
     /**
      * Connection to MySQL database.
      */
-    private Connection con = null;
+    static Connection con = null;
 
     /**
      * Connect to the MySQL database.
@@ -105,8 +99,8 @@ public class App
             String strSelect =
                     "SELECT country.Code, country.Name, country.Continent, country.Region, country.Population, city.Name as Capital "
                             + "FROM country, city "
-                            + "WHERE country.capital = city.ID";
-                            //+ "ORDER BY country.Population DESC";
+                            + "WHERE country.capital = city.ID "
+                            + "ORDER BY country.Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract country information
