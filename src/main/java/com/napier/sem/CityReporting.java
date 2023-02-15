@@ -16,6 +16,13 @@ public class CityReporting {
         ArrayList<City> cities01 = new ArrayList<City>();
         cities01 = getCitiesByPopulation();
         printCities(cities01);
+
+        // Report 02 - Cites for continent by population
+        System.out.println("Report 02 - Cities for continent by population");
+        System.out.println("Parameters: Continent = Asia");
+        ArrayList<City> cities02 = new ArrayList<City>();
+        cities02 = getCitiesForContinentByPopulation("Asia");
+        printCities(cities02);
     }
 
     public ArrayList<City> getCitiesByPopulation()
@@ -56,6 +63,44 @@ public class CityReporting {
         }
     }
 
+    public ArrayList<City> getCitiesForContinentByPopulation(String continent)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, country.Name Country, city.District, city.Population "
+                            + "FROM city, country "
+                            + "WHERE city.CountryCode = country.Code "
+                            + "AND country.Continent = '" + continent + "'"
+                            + "ORDER BY city.Population DESC";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract country information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next())
+            {
+                City city = new City();
+                Country country = new Country();
+                city.Country = new Country();
+                city.Name = rset.getString("Name");
+                city.District = rset.getString("District");
+                city.Population = rset.getInt("Population");
+                city.Country.Name = rset.getString("Country");
+                cities.add(city);
+            }
+            return cities;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
     /**
      * Prints a list of cities
      * @param cities The list of cities to print.
