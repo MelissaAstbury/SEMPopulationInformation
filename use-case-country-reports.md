@@ -48,7 +48,7 @@ The organization asks the report user for information.
 
 ## SUB-VARIATIONS
 
-The category of *Country reports* contains 6 reports that can be required from the organization:
+There are six different country reports that can be required from the organization:
 
     1. All the countries in the world organised by largest population to smallest.
     2. All the countries in a continent organised by largest population to smallest.
