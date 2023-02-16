@@ -30,7 +30,15 @@ public class CityReporting {
         ArrayList<City> cities03 = new ArrayList<City>();
         cities03 = getCitiesForDistrictByPopulation("California");
         printCities(cities03);
+
+        // Report 04 - All the cities in a country
+        System.out.println("Report 04 - Cities in a country by population");
+        System.out.println("Parameters: Country = Poland");
+        ArrayList<City> cities04 = new ArrayList<City>();
+        cities04 = getCitiesForCountryByPopulation("Poland");
+        printCities(cities04);
     }
+
 
     public ArrayList<City> getCitiesByPopulation()
     {
@@ -131,6 +139,44 @@ public class CityReporting {
             {
                 City city = new City();
                 Country country = new Country();
+                city.Country = new Country();
+                city.Name = rset.getString("Name");
+                city.District = rset.getString("District");
+                city.Population = rset.getInt("Population");
+                city.Country.Name = rset.getString("Country");
+                cities.add(city);
+            }
+            return cities;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
+    public ArrayList<City> getCitiesForCountryByPopulation(String country)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, country.Name Country, city.District, city.Population "
+                            + "FROM city, country "
+                            + "WHERE city.CountryCode = country.Code "
+                            + "AND country.Name = '" + country + "'"
+                            + "ORDER BY city.Population DESC";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract country information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next())
+            {
+                City city = new City();
                 city.Country = new Country();
                 city.Name = rset.getString("Name");
                 city.District = rset.getString("District");
