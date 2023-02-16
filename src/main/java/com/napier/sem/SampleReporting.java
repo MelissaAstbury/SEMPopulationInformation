@@ -9,10 +9,10 @@ public class SampleReporting {
         PopulationReporting populationReporting = new PopulationReporting();
         LanguageReporting languageReporting = new LanguageReporting();
 
-        countryReporting.RunSamples();
-        cityReporting.RunSamples();
+//        countryReporting.RunSamples();
+//        cityReporting.RunSamples();
         capitalCityReporting.RunSamples();
-        populationReporting.RunSamples();
-        languageReporting.RunSamples();
+//        populationReporting.RunSamples();
+//        languageReporting.RunSamples();
     }
 }
