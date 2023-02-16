@@ -16,6 +16,13 @@ public class CapitalCityReporting {
         ArrayList<City> capitalCities01 = new ArrayList<City>();
         capitalCities01 = getCapitalCitiesByPopulation();
         printCapitalCities(capitalCities01);
+
+        // Report 02 - Capital cites for continent by population
+        System.out.println("Report 02 - Capital Cities for continent by population");
+        System.out.println("Parameters: continent = Europe");
+        ArrayList<City> capitalCities02 = new ArrayList<City>();
+        capitalCities02 = getCapitalCitiesForContinentByPopulation("Europe");
+        printCapitalCities(capitalCities02);
     }
 
     public ArrayList<City> getCapitalCitiesByPopulation()
@@ -30,6 +37,46 @@ public class CapitalCityReporting {
                     "SELECT city.Name, country.Name Country, city.Population "
                             + "FROM city, country "
                             + "WHERE city.ID = country.Capital "
+                            + "ORDER BY city.Population DESC";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract country information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next())
+            {
+                City city = new City();
+                Country country = new Country();
+                city.Country = new Country();
+                city.Name = rset.getString("Name");
+                city.Country.Name = rset.getString("Country");
+                city.Population = rset.getInt("Population");
+
+                cities.add(city);
+            }
+            return cities;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get capital city details");
+            return null;
+        }
+    }
+
+    public ArrayList<City> getCapitalCitiesForContinentByPopulation(String continent)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, country.Name Country, city.Population "
+                            + "FROM city, country "
+                            + "WHERE city.ID = country.Capital "
+                            + "AND country.Continent = '" + continent + "'"
                             + "ORDER BY city.Population DESC";
 
             // Execute SQL statement
