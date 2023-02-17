@@ -23,6 +23,13 @@ public class CapitalCityReporting {
         ArrayList<City> capitalCities02 = new ArrayList<City>();
         capitalCities02 = getCapitalCitiesForContinentByPopulation("Europe");
         printCapitalCities(capitalCities02);
+
+        // Report 03 - Capital cites by population
+        System.out.println("Report 03 - Top N Populated Capital Cities In The World");
+        System.out.println("Parameters: Top N Populated Capital Cities = 5");
+        ArrayList<City> capitalCities03 = new ArrayList<City>();
+        capitalCities03 = getTopNCapitalCitiesInTheWorld("5");
+        printCapitalCities(capitalCities03);
     }
 
     public ArrayList<City> getCapitalCitiesByPopulation()
@@ -78,6 +85,47 @@ public class CapitalCityReporting {
                             + "WHERE city.ID = country.Capital "
                             + "AND country.Continent = '" + continent + "'"
                             + "ORDER BY city.Population DESC";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract country information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next())
+            {
+                City city = new City();
+                Country country = new Country();
+                city.Country = new Country();
+                city.Name = rset.getString("Name");
+                city.Country.Name = rset.getString("Country");
+                city.Population = rset.getInt("Population");
+
+                cities.add(city);
+            }
+            return cities;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get capital city details");
+            return null;
+        }
+    }
+
+    // Gets the Top N Capital Cities in the World.
+    public ArrayList<City> getTopNCapitalCitiesInTheWorld(String topN)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, country.Name Country, city.Population "
+                            + "FROM city, country "
+                            + "WHERE city.ID = country.Capital "
+                            + "ORDER BY city.Population DESC "
+                            + "LIMIT " + topN + "";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
