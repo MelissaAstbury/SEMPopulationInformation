@@ -3,7 +3,7 @@
 '' Aligns the chart from left to right
 left to right direction
 '' Creates the main actor (The report user)
-actor "Reporter user" as RU
+actor "Report user" as RU
 
 '' Creates the main rectangle that contains the 5 use cases.
 rectangle "World System" {
