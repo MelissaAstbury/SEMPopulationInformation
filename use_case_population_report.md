@@ -4,7 +4,7 @@
 
 ### Goal in Context
 
-*"As a **report user, I want to obtain the capital city reports**, so that **I can report this information to the organization"***
+*"As a **report user, I want to obtain the population reports**, so that **I can report this information to the organization"***
 
 ### Scope
 
@@ -48,7 +48,20 @@ The organization asks the report user for information.
 
 ## SUB-VARIATIONS
 
-None
+There are nine different population reports that can be required from the organization:
+
+1. The population of people, people living in cities, and people not living in cities in each 
+continent.
+2. The population of people, people living in cities, and people not living in cities in each
+region.
+3. The population of people, people living in cities, and people not living in cities in each
+country.
+4. The population of the world.
+5. The population of a continent.
+6. The population of a region.
+7. The population of a country.
+8. The population of a district.
+9. The population of a city.
 
 ## SCHEDULE
 
