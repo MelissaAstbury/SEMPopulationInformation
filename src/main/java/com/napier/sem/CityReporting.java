@@ -37,8 +37,14 @@ public class CityReporting {
         ArrayList<City> cities04 = new ArrayList<City>();
         cities04 = getCitiesForCountryByPopulation("Poland");
         printCities(cities04);
-    }
 
+        // Report 05 - All the cities in a region
+        System.out.println("Report 05 - Cities in a region by population");
+        System.out.println("Parameters: Region = Australia and New Zealand");
+        ArrayList<City> cities05 = new ArrayList<City>();
+        cities05 = getCitiesForRegionByPopulation("Australia and New Zealand");
+        printCities(cities05);
+    }
 
     public ArrayList<City> getCitiesByPopulation()
     {
@@ -168,6 +174,43 @@ public class CityReporting {
                             + "FROM city, country "
                             + "WHERE city.CountryCode = country.Code "
                             + "AND country.Name = '" + country + "'"
+                            + "ORDER BY city.Population DESC";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract country information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next())
+            {
+                City city = new City();
+                city.Country = new Country();
+                city.Name = rset.getString("Name");
+                city.District = rset.getString("District");
+                city.Population = rset.getInt("Population");
+                city.Country.Name = rset.getString("Country");
+                cities.add(city);
+            }
+            return cities;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
+    private ArrayList<City> getCitiesForRegionByPopulation(String region) {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, country.Name Country, city.District, city.Population "
+                            + "FROM city, country "
+                            + "WHERE city.CountryCode = country.Code "
+                            + "AND country.Region = '" + region + "'"
                             + "ORDER BY city.Population DESC";
 
             // Execute SQL statement
