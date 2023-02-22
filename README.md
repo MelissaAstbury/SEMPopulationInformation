@@ -5,27 +5,30 @@
 - License ![LICENSE](https://img.shields.io/github/license/MelissaAstbury/SEMPopulationInformation.svg?style=flat-square)
 - Release [![Releases](https://img.shields.io/github/v/tag/melissaastbury/sempopulationinformation?label=Release&sort=semver)](https://github.com/MelissaAstbury/SEMPopulationInformation/releases)
 
+-----
 # Checklist for Code Review 1
 
 | Task number | Description                                                                                                                                                                                                          | Done / Not Done | 
-|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------|
-| 1           | GitHub project for coursework set-up                                                                                                                                                                                 | Done            |
-| 2           | Product Backlog created.                                                                                                                                                                                             | Done            |
-| 3           | Project builds to self-contained JAR with Maven.                                                                                                                                                                     | Done            | 
-| 4           | Dockerfile for project set-up and works.                                                                                                                                                                             | Done            | 
-| 5           | GitHub Actions for project set-up and build is working using JAR, and Docker on GitHub Actions.                                                                                                                      | Done            |
-| 6           | Correct branches for GitFlow workflow created - includes <span style= 'background:grey'> master</span>, <span style= 'background:grey'> develop</span>, and <span style= 'background:grey'> release</span> branches. | Done            |
-| 7           | First release created on GitHub.                                                                                                                                                                                     | Done            | 
-| 8           | Code of Conduct defined.                                                                                                                                                                                             | Done            | 
-| 9           | Issues being used on GitHub.                                                                                                                                                                                         | Done            |
-| 10          | Tasks defined as user stories.                                                                                                                                                                                       | Done            |
-| 11          | Project integrated with Zube.io.                                                                                                                                                                                     | Done            | 
-| 12          | Kanban/Project Board being used.                                                                                                                                                                                     | Done            | 
-| 13          | Sprint Boards being used.                                                                                                                                                                                            | Done            |
-| 14          | Full use cases defined.                                                                                                                                                                                              | Done            |
-| 15          | Use case diagram created.                                                                                                                                                                                            | Done            | 
+|:-----------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------:|
+|      1      | GitHub project for coursework set-up                                                                                                                                                                                 |      Done       |
+|      2      | Product Backlog created.                                                                                                                                                                                             |      Done       |
+|      3      | Project builds to self-contained JAR with Maven.                                                                                                                                                                     |      Done       | 
+|      4      | Dockerfile for project set-up and works.                                                                                                                                                                             |      Done       | 
+|      5      | GitHub Actions for project set-up and build is working using JAR, and Docker on GitHub Actions.                                                                                                                      |      Done       |
+|      6      | Correct branches for GitFlow workflow created - includes <span style= 'background:grey'> master</span>, <span style= 'background:grey'> develop</span>, and <span style= 'background:grey'> release</span> branches. |      Done       |
+|      7      | First release created on GitHub.                                                                                                                                                                                     |      Done       | 
+|      8      | Code of Conduct defined.                                                                                                                                                                                             |      Done       | 
+|      9      | Issues being used on GitHub.                                                                                                                                                                                         |      Done       |
+|     10      | Tasks defined as user stories.                                                                                                                                                                                       |      Done       |
+|     11      | Project integrated with Zube.io.                                                                                                                                                                                     |      Done       | 
+|     12      | Kanban/Project Board being used.                                                                                                                                                                                     |      Done       | 
+|     13      | Sprint Boards being used.                                                                                                                                                                                            |      Done       |
+|     14      | Full use cases defined.                                                                                                                                                                                              |      Done       |
+|     15      | Use case diagram created.                                                                                                                                                                                            |      Done       | 
 
+The Kanban/Project Board can be accessed from this [link](https://zube.io/napier-253/project-board/w/workspace-1/kanban).
 
+---
 # Queries for Code Review 2
 **Please note these are only snapshots. Some queries were too big to capture all results in the screenshots**
 
