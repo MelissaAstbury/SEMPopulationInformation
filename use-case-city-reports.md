@@ -48,7 +48,7 @@ The organization asks the report user for information.
 
 ## SUB-VARIATIONS
 
-There are ten different capital city reports that can be required from the organization:
+There are ten different city reports that can be required from the organization:
 
     1. All the cities in the world organised by largest population to smallest.
     2. All the cities in a continent organised by largest population to smallest.
