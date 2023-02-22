@@ -15,7 +15,7 @@
 |      3      | Project builds to self-contained JAR with Maven.                                                                                                                                                                     |      Done       | 
 |      4      | Dockerfile for project set-up and works.                                                                                                                                                                             |      Done       | 
 |      5      | GitHub Actions for project set-up and build is working using JAR, and Docker on GitHub Actions.                                                                                                                      |      Done       |
-|      6      | Correct branches for GitFlow workflow created - includes <span style= 'background:grey'> master</span>, <span style= 'background:grey'> develop</span>, and <span style= 'background:grey'> release</span> branches. |      Done       |
+|      6      | Correct branches for GitFlow workflow created - includes <span style= 'background:blue'> master</span>, <span style= 'background:blue'> develop</span>, and <span style= 'background:blue'> release</span> branches. |      Done       |
 |      7      | First release created on GitHub.                                                                                                                                                                                     |      Done       | 
 |      8      | Code of Conduct defined.                                                                                                                                                                                             |      Done       | 
 |      9      | Issues being used on GitHub.                                                                                                                                                                                         |      Done       |
@@ -26,7 +26,7 @@
 |     14      | Full use cases defined.                                                                                                                                                                                              |      Done       |
 |     15      | Use case diagram created.                                                                                                                                                                                            |      Done       | 
 
-The Kanban/Project Board can be accessed from this [link](https://zube.io/napier-253/project-board/w/workspace-1/kanban).
+The Kanban/Project Board can be accessed from this [link.](https://zube.io/napier-253/project-board/w/workspace-1/kanban)
 
 ---
 # Queries for Code Review 2
