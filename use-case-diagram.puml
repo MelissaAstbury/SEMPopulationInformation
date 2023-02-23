@@ -1,0 +1,42 @@
+@startuml
+
+'' Aligns the chart from left to right
+left to right direction
+'' Creates the main actor (The report user)
+actor "Report user" as RU
+
+'' Creates the main rectangle that contains the 5 use cases.
+rectangle "World System" {
+    usecase "Gets Country Reports" as UC1
+    usecase "Gets City Reports" as UC2
+    usecase "Gets Capital City Reports" as UC3
+    usecase "Gets Population Reports" as UC4
+    usecase "Gets Language Reports" as UC5
+    usecase UC1a as "Print reports"
+}
+
+'' Creates a rectangle for the Database.
+rectangle Database
+
+'' Associates the Report User to the 5 use cases.
+RU - UC1
+RU - UC2
+RU - UC3
+RU - UC4
+RU --- UC5
+
+'' Associates the use cases to the "Prints reports" action.
+UC1a <.UC5:  include
+UC1a <.UC4:  include
+UC1a <.UC3:  include
+UC1a <.UC2:  include
+UC1a <.UC1:  include
+
+'' Associates the use cases to the Database.
+UC1 ---- Database
+UC2 - Database
+UC3 - Database
+UC4 - Database
+UC5 - Database
+
+@enduml
