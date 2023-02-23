@@ -27,7 +27,6 @@
 |     15      | Use case diagram created.                                                                                                                                                                                            |      Done       | 
 
 The Kanban/Project Board can be accessed from [this link.](https://zube.io/napier-253/project-board/w/workspace-1/kanban)
-
 ---
 # Queries for Code Review 2
 **Please note these are only snapshots. Some queries were too big to capture all results in the screenshots**
