@@ -161,9 +161,20 @@ public class CountryReporting {
     {
         // Print header
         System.out.println(String.format("%-10s %-50s %-30s %-30s %-20s %-30s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
+
+        // Check countries is not null
+        if (countries == null)
+        {
+            System.out.println("No countries");
+            return;
+        }
+
         // Loop over all countries in the list
         for (Country country : countries)
         {
+            if (country == null)
+                continue;
+
             String country_string =
                     String.format("%-10s %-50s %-30s %-30s %-20s %-30s",
                             country.Code, country.Name, country.Continent, country.Region, country.Population, country.Capital.Name);
