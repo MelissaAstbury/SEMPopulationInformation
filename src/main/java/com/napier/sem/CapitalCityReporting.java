@@ -8,7 +8,7 @@ import static com.napier.sem.App.con;
 
 public class CapitalCityReporting {
     public void RunSamples(){
-        System.out.println("Capital City Reporting");
+        System.out.println("\nCapital City Reporting");
 
         // Report 01 - Capital cites by population
         System.out.println("Report 01 - Capital Cities by population");
@@ -30,6 +30,14 @@ public class CapitalCityReporting {
         ArrayList<City> capitalCities03 = new ArrayList<City>();
         capitalCities03 = getTopNCapitalCitiesInTheWorld("5");
         printCapitalCities(capitalCities03);
+
+        // Report 19 - Capital cites for region by population
+        System.out.println("Report 19 - Capital Cities for region by population");
+        System.out.println("Parameters: region = Caribbean");
+        ArrayList<City> capitalCities19 = new ArrayList<City>();
+        capitalCities19 = getCapitalCitiesForRegionByPopulation("Caribbean");
+        printCapitalCities(capitalCities19);
+
     }
 
     public ArrayList<City> getCapitalCitiesByPopulation()
@@ -152,6 +160,45 @@ public class CapitalCityReporting {
         }
     }
 
+    public ArrayList<City> getCapitalCitiesForRegionByPopulation(String region)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, country.Name Country, city.Population "
+                            + "FROM city, country "
+                            + "WHERE city.ID = country.Capital "
+                            + "AND country.Region = '" + region + "'"
+                            + "ORDER BY city.Population DESC";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract country information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next())
+            {
+                City city = new City();
+                Country country = new Country();
+                city.Country = new Country();
+                city.Name = rset.getString("Name");
+                city.Country.Name = rset.getString("Country");
+                city.Population = rset.getInt("Population");
+
+                cities.add(city);
+            }
+            return cities;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get capital city details");
+            return null;
+        }
+    }
     /**
      * Prints a list of capital cities
      * @param cities The list of cities to print.
