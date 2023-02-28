@@ -4,7 +4,8 @@
 - Master Build Status ![GitHub Workflow Status (with branch)](https://img.shields.io/github/actions/workflow/status/MelissaAstbury/SEMPopulationInformation/main.yml?branch=master)
 - License ![LICENSE](https://img.shields.io/github/license/MelissaAstbury/SEMPopulationInformation.svg?style=flat-square)
 - Release [![Releases](https://img.shields.io/github/v/tag/melissaastbury/sempopulationinformation?label=Release&sort=semver)](https://github.com/MelissaAstbury/SEMPopulationInformation/releases)
-
+- Developer Coverage  [![codecov](https://codecov.io/github/MelissaAstbury/SEMPopulationInformation/branch/developer/graph/badge.svg)](https://codecov.io/github/MelissaAstbury/SEMPopulationInformation)
+- Master Coverage  [![codecov](https://codecov.io/github/MelissaAstbury/SEMPopulationInformation/branch/master/graph/badge.svg)](https://codecov.io/github/MelissaAstbury/SEMPopulationInformation)
 -----
 # Checklist for Code Review 1
 
@@ -64,4 +65,4 @@ The Kanban/Project Board can be accessed from [this link.](https://zube.io/napie
 | 29  | The population of a country                                                                                 | Yes | ![img.png](getPopulationForCountry.PNG)            |
 | 30  | The population of a district                                                                                | No  | put your image here                                |
 | 31  | The population of a city                                                                                    | No  | put your image here                                |
-| 32  | The number of people who speak Chinese, English, Hindi, Spanish and Arabic from greatest number to smallest | Yes | ![img.png](getPopulationForCountry.PNG)            |
+| 32  | The number of people who speak Chinese, English, Hindi, Spanish and Arabic from greatest number to smallest | Yes | ![img.png](getLanguageByPopulation.PNG)            |
