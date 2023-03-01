@@ -53,7 +53,7 @@ The Kanban/Project Board can be accessed from [this link.](https://zube.io/napie
 | 18  | All the capital cities in a continent organised by largest population to smallest                           | Yes | ![img.png](getCapitalCitiesForContinentByPopl.PNG) |
 | 19  | All the capital cities in a region organised by largest to smallest                                         | No  | put your image here                                |
 | 20  | The top 'N' populated capital cities in the world where N is provided by the user                           | Yes | ![img.png](getTopNCapitalCitiesInTheWorld.png)     |
-| 21  | The top 'N' populated capital cities in a continent where N is provided by the user                         | No  | put your image here                                |
+| 21  | The top 'N' populated capital cities in a continent where N is provided by the user                         | Yes | ![img.png](getTopNCapitalCitiesinaContinent.png)   |
 | 22  | The top 'N' populated capital cities in a region where N is provided by the user                            | No  | put your image here                                |
 | 23  | The population of people, people living in cities, and people not living in cities in each continent        | No  | put your image here                                |
 | 24  | The population of people, people living in cities, and people not living in cities in each region           | No  | put your image here                                |
@@ -64,4 +64,4 @@ The Kanban/Project Board can be accessed from [this link.](https://zube.io/napie
 | 29  | The population of a country                                                                                 | Yes | ![img.png](getPopulationForCountry.PNG)            |
 | 30  | The population of a district                                                                                | No  | put your image here                                |
 | 31  | The population of a city                                                                                    | No  | put your image here                                |
-| 32  | The number of people who speak Chinese, English, Hindi, Spanish and Arabic from greatest number to smallest | Yes | ![img.png](getPopulationForCountry.PNG)            |
+| 32  | The number of people who speak Chinese, English, Hindi, Spanish and Arabic from greatest number to smallest | Yes | ![img.png](getLanguageByPopulation.PNG)            |
