@@ -8,7 +8,7 @@ import static com.napier.sem.App.con;
 
 public class CityReporting {
     public void RunSamples(){
-        System.out.println("City Reporting");
+        System.out.println("\nCity Reporting");
 
         // Report 01 - Cites by population
         System.out.println("Report 01 - Cities by population");
@@ -44,6 +44,13 @@ public class CityReporting {
         ArrayList<City> cities05 = new ArrayList<City>();
         cities05 = getCitiesForRegionByPopulation("Australia and New Zealand");
         printCities(cities05);
+
+        // Report 16 - the top n populated cities in a district by population
+        System.out.println("Report 16 - the top n populated cities in a district by population");
+        System.out.println("Parameters: District = California, TopN=5");
+        ArrayList<City> cities16 = new ArrayList<City>();
+        cities16 = getTopNCitiesForDistrictByPopulation("California",5);
+        printCities(cities16);
     }
 
     public ArrayList<City> getCitiesByPopulation()
@@ -236,6 +243,47 @@ public class CityReporting {
             return null;
         }
     }
+
+    public ArrayList<City> getTopNCitiesForDistrictByPopulation(String district, int topn)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, country.Name Country, city.District, city.Population "
+                            + "FROM city, country "
+                            + "WHERE city.CountryCode = country.Code "
+                            + "AND city.District = '" + district + "'"
+                            + "ORDER BY city.Population DESC "
+                            + "LIMIT " + topn;
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract country information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next())
+            {
+                City city = new City();
+                Country country = new Country();
+                city.Country = new Country();
+                city.Name = rset.getString("Name");
+                city.District = rset.getString("District");
+                city.Population = rset.getInt("Population");
+                city.Country.Name = rset.getString("Country");
+                cities.add(city);
+            }
+            return cities;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
     /**
      * Prints a list of cities
      * @param cities The list of cities to print.
