@@ -44,6 +44,13 @@ public class CapitalCityReporting {
         ArrayList<City> capitalCities04 = new ArrayList<City>();
         capitalCities04 = getTopNCapitalCitiesInaContinent(5, "Africa");
         printCapitalCities(capitalCities04);
+
+        // Report 05 - Top N Capital cites in a region by population
+        System.out.println("Report 05 - Top N Populated Capital Cities in a Region");
+        System.out.println("Parameters: Top N Populated Capital Cities = 5 | Region: North America");
+        ArrayList<City> capitalCities05 = new ArrayList<City>();
+        capitalCities05 = getTopNCapitalCitiesInARegion(5,"North America");
+        printCapitalCities(capitalCities05);
     }
 
     public ArrayList<City> getCapitalCitiesByPopulation()
@@ -249,6 +256,48 @@ public class CapitalCityReporting {
             return null;
         }
     }
+
+    public ArrayList<City> getTopNCapitalCitiesInARegion(int topN, String region)
+    {
+        String topNstring = Integer.toString(topN);
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, country.Name Country, city.Population "
+                            + "FROM city, country "
+                            + "WHERE city.ID = country.Capital "
+                            + "AND country.Region = '" + region + "'"
+                            + "ORDER BY city.Population DESC "
+                            + "LIMIT " + topNstring + "";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract country information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next())
+            {
+                City city = new City();
+                city.Country = new Country();
+                city.Name = rset.getString("Name");
+                city.Country.Name = rset.getString("Country");
+                city.Population = rset.getInt("Population");
+
+                cities.add(city);
+            }
+            return cities;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get capital cities in a region");
+            return null;
+        }
+    }
+
     /**
      * Prints a list of capital cities
      * @param cities The list of cities to print.
