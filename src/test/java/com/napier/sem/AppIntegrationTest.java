@@ -27,4 +27,14 @@ public class AppIntegrationTest
         Country country = countries.get(0);
         assertEquals(country.Name, "China");
     }
+    @Test
+    void testReport05()
+    {
+        // Report 05 - Top N countries in a continent by population
+        System.out.println("Report 05 - Top N Populated Countries in a Continent");
+        System.out.println("Parameters: Top N Populated Countries = 5 | Continent: Europe");
+        ArrayList<Country> countries05;
+        countries05 = countryReporting.getTopNCountriesInAContinent(5, "Europe");
+        countryReporting.printCountries(countries05);
+    }
 }

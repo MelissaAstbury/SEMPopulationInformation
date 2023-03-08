@@ -39,7 +39,16 @@ public class CountryReporting {
         ArrayList<Country> countries04;
         countries04 = getTopNCountriesInARegion(5, "Eastern Asia");
         printCountries(countries04);
+
+        // Report 05 - Top N countries in a continent by population
+        System.out.println("Report 05 - Top N Populated Countries in a Continent");
+        System.out.println("Parameters: Top N Populated Countries = 5 | Continent: Europe");
+        ArrayList<Country> countries05;
+        countries05 = getTopNCountriesInAContinent(5, "Europe");
+        printCountries(countries05);
     }
+
+
 
     public ArrayList<Country> getCountriesByPopulation()
     {
@@ -173,6 +182,48 @@ public class CountryReporting {
                             + "FROM country, city "
                             + "WHERE country.capital = city.ID "
                             + "AND country.Region = '" + region + "' "
+                            + "ORDER BY country.Population DESC "
+                            + "LIMIT " + topN + "";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            // Extract country information
+            ArrayList<Country> countries = new ArrayList<Country>();
+            while (rset.next())
+            {
+                Country country = new Country();
+                country.Capital = new City();
+                country.Code = rset.getString("Code");
+                country.Name = rset.getString("Name");
+                country.Continent = rset.getString("Continent");
+                country.Region = rset.getString("Region");
+                country.Population = rset.getInt("Population");
+                country.Capital.Name = rset.getString("Capital");
+                countries.add(country);
+            }
+            return countries;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details");
+            return null;
+        }
+    }
+
+    public ArrayList<Country> getTopNCountriesInAContinent(int topN, String continent)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.Code, country.Name, country.Continent, country.Region, country.Population, city.Name as Capital "
+                            + "FROM country, city "
+                            + "WHERE country.capital = city.ID "
+                            + "AND country.Continent = '" + continent + "' "
                             + "ORDER BY country.Population DESC "
                             + "LIMIT " + topN + "";
             // Execute SQL statement
