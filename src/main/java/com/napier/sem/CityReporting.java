@@ -45,6 +45,13 @@ public class CityReporting {
         cities05 = getCitiesForRegionByPopulation("Australia and New Zealand");
         printCities(cities05);
 
+        // Report 13 - the top n populated cities in a continent by population
+        System.out.println("Report 13 - the top n populated cities in a continent by population");
+        System.out.println("Parameters: continent = Europe, TopN=5");
+        ArrayList<City> cities13 = new ArrayList<City>();
+        cities13 = getTopNCitiesForContinentByPopulation("Europe",5);
+        printCities(cities13);
+
         // Report 16 - the top n populated cities in a district by population
         System.out.println("Report 16 - the top n populated cities in a district by population");
         System.out.println("Parameters: District = California, TopN=5");
@@ -251,6 +258,45 @@ public class CityReporting {
         }
     }
 
+    public ArrayList<City> getTopNCitiesForContinentByPopulation(String continent, int topn)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, country.Name Country, city.District, city.Population "
+                            + "FROM city, country "
+                            + "WHERE city.CountryCode = country.Code "
+                            + "AND country.Continent = '" + continent + "'"
+                            + "ORDER BY city.Population DESC "
+                            + "LIMIT " + topn;
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract country information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next())
+            {
+                City city = new City();
+                Country country = new Country();
+                city.Country = new Country();
+                city.Name = rset.getString("Name");
+                city.District = rset.getString("District");
+                city.Population = rset.getInt("Population");
+                city.Country.Name = rset.getString("Country");
+                cities.add(city);
+            }
+            return cities;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
     public ArrayList<City> getTopNCitiesForDistrictByPopulation(String district, int topn)
     {
         try
