@@ -45,7 +45,7 @@ The Kanban/Project Board can be accessed from [this link.](https://zube.io/napie
 | 10  | All the cities in a country organised by largest population to smallest                                     | Yes | ![img.png](getCitiesForCountryByPopulation.PNG)      |
 | 11  | All the cities in a district organised by largest population to smallest                                    | Yes | ![img.png](getCitiesForDistrictByPopulation.png)     |
 | 12  | The top 'N' populated cities in the world where N is provided by the user                                   | No  | put your image here                                  |
-| 13  | The top 'N' populated cities in a continent where N is provided by the user                                 | No  | put your image here                                  |
+| 13  | The top 'N' populated cities in a continent where N is provided by the user                                 | No  | ![img.png](getTopNCapitalCitiesinaContinent.png)   |
 | 14  | The top 'N' populated cities in a region where N is provided by the user                                    | Yes | ![img.png](getTopNCapitalCitiesInARegion.png)        |
 | 15  | The top 'N' populated cities in a country where N is provided by the user                                   | Yes | ![img.png](getTopNCitiesforCountrybyPopulation.png)  |
 | 16  | The top 'N' populated cities in a district where N is provided by the user                                  | Yes | ![img.png](getTopNCitiesforDistrictbyPopulation.png) |
