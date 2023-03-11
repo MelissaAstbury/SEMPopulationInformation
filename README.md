@@ -4,7 +4,8 @@
 - Master Build Status ![GitHub Workflow Status (with branch)](https://img.shields.io/github/actions/workflow/status/MelissaAstbury/SEMPopulationInformation/main.yml?branch=master)
 - License ![LICENSE](https://img.shields.io/github/license/MelissaAstbury/SEMPopulationInformation.svg?style=flat-square)
 - Release [![Releases](https://img.shields.io/github/v/tag/melissaastbury/sempopulationinformation?label=Release&sort=semver)](https://github.com/MelissaAstbury/SEMPopulationInformation/releases)
-
+- Developer Coverage  [![codecov](https://codecov.io/gh/MelissaAstbury/SEMPopulationInformation/branch/develop/graph/badge.svg?token=098DKJ7AGC)](https://codecov.io/gh/MelissaAstbury/SEMPopulationInformation)
+- Master Coverage  [![codecov](https://codecov.io/gh/MelissaAstbury/SEMPopulationInformation/branch/master/graph/badge.svg?token=098DKJ7AGC)](https://codecov.io/gh/MelissaAstbury/SEMPopulationInformation)
 -----
 # Checklist for Code Review 1
 
