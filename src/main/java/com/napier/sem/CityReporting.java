@@ -337,7 +337,7 @@ public class CityReporting {
      */
     public void printCities(ArrayList<City> cities)
     {
-        // Check countries is not null
+        // Check cities is not null
         if (cities == null)
         {
             System.out.println("No cities");

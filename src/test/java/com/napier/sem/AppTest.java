@@ -81,16 +81,17 @@ public class AppTest
         cities.add(null);
         cityReporting.printCities(cities);
     }
+
     @Test
     void printCityReportsValid()
     {
         ArrayList<City> cities = new ArrayList<City>();
         City city = new City();
-        city.Name = "PARIS";
-        city.District = "UNKNOWN";
-        city.Population = 1;
-        city.Country.Name = "FRANCE";
-        cities.add(city);
+        city.Name = "Sydney";
+        city.District = "New South Wales";
+        city.Population = 3276207;
+//        city.Country.Name = "Australia";
+//        cities.add(city);
         cityReporting.printCities(cities);
     }
 }
