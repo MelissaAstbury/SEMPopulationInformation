@@ -90,8 +90,9 @@ public class AppTest
         city.Name = "Sydney";
         city.District = "New South Wales";
         city.Population = 3276207;
-//        city.Country.Name = "Australia";
-//        cities.add(city);
+        city.Country = new Country();
+        city.Country.Name = "Australia";
+        cities.add(city);
         cityReporting.printCities(cities);
     }
 }
