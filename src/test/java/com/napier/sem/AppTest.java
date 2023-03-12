@@ -12,12 +12,14 @@ public class AppTest
 {
     static App app;
     static CountryReporting countryReporting;
+    static CityReporting cityReporting;
 
     @BeforeAll
     static void init()
     {
         app = new App();
         countryReporting = new CountryReporting();
+        cityReporting = new CityReporting();
     }
 
     /**
@@ -55,5 +57,42 @@ public class AppTest
         country.Capital.Name = "Free City";
         countries.add(country);
         countryReporting.printCountries(countries);
+    }
+
+    /**
+     City Reporting Tests
+     */
+    @Test
+    void printCityReportsTestEmpty()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        cityReporting.printCities(cities);
+
+    }
+    @Test
+    void printCityReportsTestNull()
+    {
+        cityReporting.printCities(null);
+    }
+    @Test
+    void printCityReportsTestContainsNull()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        cities.add(null);
+        cityReporting.printCities(cities);
+    }
+
+    @Test
+    void printCityReportsValid()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        City city = new City();
+        city.Name = "Sydney";
+        city.District = "New South Wales";
+        city.Population = 3276207;
+        city.Country = new Country();
+        city.Country.Name = "Australia";
+        cities.add(city);
+        cityReporting.printCities(cities);
     }
 }
