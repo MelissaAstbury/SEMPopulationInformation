@@ -16,6 +16,13 @@ public class PopulationReporting {
         System.out.println("\nPopulation Reporting");
         System.out.println("====================");
 
+        // Report 25 - People Living/Not Living in Cities in each Country
+        System.out.println("Report 25 - People Living/Not Living in Cities in each Country");
+        System.out.println("Parameters: None");
+        ArrayList<PopulationReport> populationReport25 = new ArrayList<PopulationReport>();
+        populationReport25 = getPeopleLivingNotLivingInCitiesInEachCountry();
+        printPopulationReport(populationReport25);
+
         // Report 29 - Countries by population
         System.out.println("Report 29 - Population of a country");
         System.out.println("Parameters: country = Ireland");
@@ -24,6 +31,51 @@ public class PopulationReporting {
         printPopulationReport(populationReport29);
     }
 
+    public ArrayList<PopulationReport> getPeopleLivingNotLivingInCitiesInEachCountry()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT c.Name, c.Population AS TotalPopulation "
+                            + ", cp.TotalPopulationInCities "
+                            + ", (cp.TotalPopulationInCities / c.Population) PercentageInCities "
+                            + ", (c.Population - cp.TotalPopulationInCities) TotalPopulationNotInCities "
+                            + ", ((c.Population - cp.TotalPopulationInCities) / c.Population) PercentageNotInCities "
+                            + "FROM country c "
+                            + "JOIN (SELECT CountryCode, SUM(Population) AS TotalPopulationInCities "
+                            + "FROM city "
+                            + "GROUP BY CountryCode) cp ON cp.CountryCode = c.Code";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            // Extract country information
+            ArrayList<PopulationReport> populationReports = new ArrayList<PopulationReport>();
+            while (rset.next())
+            {
+                PopulationReport populationReport = new PopulationReport();
+
+                populationReport.Name = rset.getString("Name");
+                populationReport.TotalPopulation = rset.getInt("TotalPopulation");
+                populationReport.TotalPopulationInCities = rset.getInt("TotalPopulationInCities");
+                populationReport.PercentageInCities = rset.getDouble("PercentageInCities");
+                populationReport.TotalPopulationNotInCities = rset.getInt("TotalPopulationNotInCities");
+                populationReport.PercentageNotInCities = rset.getDouble("PercentageNotInCities");
+                populationReports.add(populationReport);
+            }
+            return populationReports;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get details");
+            return null;
+        }
+    }
     /**
      * Get population data for a country
      * @param country The list of cities to print.
