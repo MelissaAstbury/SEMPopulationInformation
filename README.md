@@ -28,6 +28,7 @@
 |     15      | Use case diagram created.                                                                                                                                                                                            |      Done       | 
 
 The Kanban/Project Board can be accessed from [this link.](https://zube.io/napier-253/project-board/w/workspace-1/kanban)
+
 ---
 # Queries for Code Review 2
 **Please note these are only snapshots. Some queries were too big to capture all results in the screenshots**
@@ -58,7 +59,7 @@ The Kanban/Project Board can be accessed from [this link.](https://zube.io/napie
 | 22  | The top 'N' populated capital cities in a region where N is provided by the user                            | No  | put your image here                                  |
 | 23  | The population of people, people living in cities, and people not living in cities in each continent        | No  | put your image here                                  |
 | 24  | The population of people, people living in cities, and people not living in cities in each region           | No  | put your image here                                  |
-| 25  | The population of people, people living in cities, and people not living in cities in each country          | No  | put your image here                                  |
+| 25  | The population of people, people living in cities, and people not living in cities in each country          | No  | ![img.png](getPeopleLivingNotLivingInCItiesPerCountry.png)|
 | 26  | The population of the world                                                                                 | No  | put your image here                                  |
 | 27  | The population of a continent                                                                               | No  | put your image here                                  |
 | 28  | The population of a region                                                                                  | No  | put your image here                                  |
