@@ -7,11 +7,16 @@ public class App
     public static void main(String[] args)
     {
         System.out.println("Let's go! attempt 1");
+
         // Create new Application
         App a = new App();
 
         // Connect to database
-        a.connect();
+        if(args.length < 1){
+            a.connect("localhost:33060", 30000);
+        }else{
+            a.connect(args[0], Integer.parseInt(args[1]));
+        }
 
         SampleReporting sampleReporting = new SampleReporting();
         sampleReporting.RunSamples();
@@ -28,7 +33,7 @@ public class App
     /**
      * Connect to the MySQL database.
      */
-    public void connect()
+    public void connect(String location, int delay)
     {
         try
         {
@@ -48,9 +53,13 @@ public class App
             try
             {
                 // Wait a bit for db to start
-                Thread.sleep(30000);
+                Thread.sleep(delay);
+
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "example");
+                //con = DriverManager.getConnection("jdbc:mysql://db:3306/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
+                con = DriverManager.getConnection("jdbc:mysql://" + location
+                        + "/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
+
                 System.out.println("Successfully connected");
                 break;
             }
@@ -82,48 +91,6 @@ public class App
             {
                 System.out.println("Error closing connection to database");
             }
-        }
-    }
-
-    /**
-     * Gets all the countries
-     * @return A list of all countries.
-     */
-    public ArrayList<Country> getCountries()
-    {
-        try
-        {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT country.Code, country.Name, country.Continent, country.Region, country.Population, city.Name as Capital "
-                            + "FROM country, city "
-                            + "WHERE country.capital = city.ID "
-                            + "ORDER BY country.Population DESC";
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract country information
-            ArrayList<Country> countries = new ArrayList<Country>();
-            while (rset.next())
-            {
-                Country country = new Country();
-                country.Capital = new City();
-                country.Code = rset.getString("Code");
-                country.Name = rset.getString("Name");
-                country.Continent = rset.getString("Continent");
-                country.Region = rset.getString("Region");
-                country.Population = rset.getInt("Population");
-                country.Capital.Name = rset.getString("Capital");
-                countries.add(country);
-            }
-            return countries;
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get country details");
-            return null;
         }
     }
 

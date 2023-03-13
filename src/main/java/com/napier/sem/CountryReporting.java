@@ -32,6 +32,13 @@ public class CountryReporting {
         ArrayList<Country> countries03;
         countries03 = getCountriesInAContinent("Europe");
         printCountries(countries03);
+
+        // Report 04 - Top N countries in a region by population
+        System.out.println("Report 04 - Top N Populated Countries in a Region");
+        System.out.println("Parameters: Top N Populated Countries = 5 | Region: Eastern Asia");
+        ArrayList<Country> countries04;
+        countries04 = getTopNCountriesInARegion(5, "Eastern Asia");
+        printCountries(countries04);
     }
 
     public ArrayList<Country> getCountriesByPopulation()
@@ -153,6 +160,48 @@ public class CountryReporting {
         }
     }
 
+    public ArrayList<Country> getTopNCountriesInARegion(int topN, String region)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.Code, country.Name, country.Continent, country.Region, country.Population, city.Name as Capital "
+                            + "FROM country, city "
+                            + "WHERE country.capital = city.ID "
+                            + "AND country.Region = '" + region + "' "
+                            + "ORDER BY country.Population DESC "
+                            + "LIMIT " + topN + "";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            // Extract country information
+            ArrayList<Country> countries = new ArrayList<Country>();
+            while (rset.next())
+            {
+                Country country = new Country();
+                country.Capital = new City();
+                country.Code = rset.getString("Code");
+                country.Name = rset.getString("Name");
+                country.Continent = rset.getString("Continent");
+                country.Region = rset.getString("Region");
+                country.Population = rset.getInt("Population");
+                country.Capital.Name = rset.getString("Capital");
+                countries.add(country);
+            }
+            return countries;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details");
+            return null;
+        }
+    }
+
     /**
      * Prints a list of countries.
      * @param countries The list of countries to print.
@@ -161,9 +210,20 @@ public class CountryReporting {
     {
         // Print header
         System.out.println(String.format("%-10s %-50s %-30s %-30s %-20s %-30s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
+
+        // Check countries is not null
+        if (countries == null)
+        {
+            System.out.println("No countries");
+            return;
+        }
+
         // Loop over all countries in the list
         for (Country country : countries)
         {
+            if (country == null)
+                continue;
+
             String country_string =
                     String.format("%-10s %-50s %-30s %-30s %-20s %-30s",
                             country.Code, country.Name, country.Continent, country.Region, country.Population, country.Capital.Name);
