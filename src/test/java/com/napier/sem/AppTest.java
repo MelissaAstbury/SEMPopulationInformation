@@ -8,11 +8,17 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * <h1>A series of unit tests</h1>
+ * tests the integrity of data retrieval
+ */
+
 public class AppTest
 {
     static App app;
     static CountryReporting countryReporting;
     static CityReporting cityReporting;
+    static LanguageReporting languageReporting;
 
     @BeforeAll
     static void init()
@@ -20,6 +26,7 @@ public class AppTest
         app = new App();
         countryReporting = new CountryReporting();
         cityReporting = new CityReporting();
+        languageReporting = new LanguageReporting();
     }
 
     /**
@@ -94,5 +101,33 @@ public class AppTest
         city.Country.Name = "Australia";
         cities.add(city);
         cityReporting.printCities(cities);
+    }
+
+    /**
+     Language Reporting Tests
+     */
+    @Test
+    void printLanguageReportsTestNull()
+    {
+        languageReporting.printLanguageReport(null);
+    }
+    @Test
+    void printLanguageReportsTestContainsNull()
+    {
+        ArrayList<LanguageReport> languageReports = new ArrayList<LanguageReport>();
+        languageReports.add(null);
+        languageReporting.printLanguageReport(languageReports);
+    }
+
+    @Test
+    void printLanguageReportsValid()
+    {
+        ArrayList<LanguageReport> languageReports = new ArrayList<LanguageReport>();
+        LanguageReport languageReport = new LanguageReport();
+        languageReport.Language = "Gaelic";
+        languageReport.PercentageOfWorldPopulation = 0.0001;
+        languageReport.TotalPopulation = 100000;
+        languageReports.add(languageReport);
+        languageReporting.printLanguageReport(languageReports);
     }
 }

@@ -6,6 +6,11 @@ import java.util.ArrayList;
 
 import static com.napier.sem.App.con;
 
+/**
+ * <h1>Language Reporting</h1>
+ * Data retrieval and reporting for all reports with the standard language report format
+ */
+
 public class LanguageReporting {
     public void RunSamples() {
 
@@ -77,9 +82,18 @@ public class LanguageReporting {
         System.out.println(String.format("%-50s %-20s %-35s",
                 "Language", "Total Population", "% of World Population"));
 
+        // Check is not null
+        if (languageReports == null)
+        {
+            System.out.println("No language reports");
+            return;
+        }
+
         // Loop over all items in the list
         for (LanguageReport languageReport : languageReports)
         {
+            if (languageReport == null)
+                continue;
             String language_string =
                     String.format("%-50s %-20s %.2f",
                             languageReport.Language,
