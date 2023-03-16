@@ -16,6 +16,14 @@ public class PopulationReporting {
         System.out.println("\nPopulation Reporting");
         System.out.println("====================");
 
+
+        // Report 23 - People Living In/ Not Living In Cities In Each Continent
+        System.out.println("Report 23 - People Living In/ Not Living In Cities In Each Continent");
+        System.out.println("Parameters: None");
+        ArrayList<PopulationReport> populationReport23 = new ArrayList<PopulationReport>();
+        populationReport23 = getPeopleLivingNotLivingInCitiesInEachContinent();
+        printPopulationReport(populationReport23);
+
         // Report 25 - People Living/Not Living in Cities in each Country
         System.out.println("Report 25 - People Living/Not Living in Cities in each Country");
         System.out.println("Parameters: None");
@@ -30,6 +38,57 @@ public class PopulationReporting {
         populationReport29 = getPopulationForCountry("Ireland");
         printPopulationReport(populationReport29);
     }
+
+
+    public ArrayList<PopulationReport> getPeopleLivingNotLivingInCitiesInEachContinent()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT  c.Continent as Name "
+                            + ", Sum(distinct c.Population) as TotalPopulation "
+                            + ", Sum(ci.Population) as TotalPopulationInCities "
+                            + ", (Sum(ci.Population) / Sum(distinct c.Population)) PercentageInCities "
+                            + ", (Sum(distinct c.Population) - Sum(ci.Population)) TotalPopulationNotInCities "
+                            + ", (Sum(distinct c.Population)-Sum(ci.Population))/ Sum(distinct c.Population) PercentageNotInCities "
+                            + "FROM country c "
+                            + "LEFT JOIN city as ci "
+                            + "ON c.Code = ci.CountryCode "
+                            + "GROUP BY Continent "
+                            + "ORDER BY TotalPopulation "
+                            + "DESC LIMIT 6";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            // Extract country information
+            ArrayList<PopulationReport> populationReports = new ArrayList<PopulationReport>();
+            while (rset.next())
+            {
+                PopulationReport populationReport = new PopulationReport();
+
+                populationReport.Name = rset.getString("Name");
+                populationReport.TotalPopulation = rset.getLong("TotalPopulation");
+                populationReport.TotalPopulationInCities = rset.getLong("TotalPopulationInCities");
+                populationReport.PercentageInCities = rset.getDouble("PercentageInCities");
+                populationReport.TotalPopulationNotInCities = rset.getLong("TotalPopulationNotInCities");
+                populationReport.PercentageNotInCities = rset.getDouble("PercentageNotInCities");
+                populationReports.add(populationReport);
+            }
+            return populationReports;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get details");
+            return null;
+        }
+    }
+
 
     public ArrayList<PopulationReport> getPeopleLivingNotLivingInCitiesInEachCountry()
     {
@@ -60,10 +119,10 @@ public class PopulationReporting {
                 PopulationReport populationReport = new PopulationReport();
 
                 populationReport.Name = rset.getString("Name");
-                populationReport.TotalPopulation = rset.getInt("TotalPopulation");
-                populationReport.TotalPopulationInCities = rset.getInt("TotalPopulationInCities");
+                populationReport.TotalPopulation = rset.getLong("TotalPopulation");
+                populationReport.TotalPopulationInCities = rset.getLong("TotalPopulationInCities");
                 populationReport.PercentageInCities = rset.getDouble("PercentageInCities");
-                populationReport.TotalPopulationNotInCities = rset.getInt("TotalPopulationNotInCities");
+                populationReport.TotalPopulationNotInCities = rset.getLong("TotalPopulationNotInCities");
                 populationReport.PercentageNotInCities = rset.getDouble("PercentageNotInCities");
                 populationReports.add(populationReport);
             }
@@ -112,10 +171,10 @@ public class PopulationReporting {
                 PopulationReport populationReport = new PopulationReport();
 
                 populationReport.Name = rset.getString("Name");
-                populationReport.TotalPopulation = rset.getInt("TotalPopulation");
-                populationReport.TotalPopulationInCities = rset.getInt("TotalPopulationInCities");
+                populationReport.TotalPopulation = rset.getLong("TotalPopulation");
+                populationReport.TotalPopulationInCities = rset.getLong("TotalPopulationInCities");
                 populationReport.PercentageInCities = rset.getDouble("PercentageInCities");
-                populationReport.TotalPopulationNotInCities = rset.getInt("TotalPopulationNotInCities");
+                populationReport.TotalPopulationNotInCities = rset.getLong("TotalPopulationNotInCities");
                 populationReport.PercentageNotInCities = rset.getDouble("PercentageNotInCities");
                 populationReports.add(populationReport);
             }

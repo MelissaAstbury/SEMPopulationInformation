@@ -2,9 +2,9 @@ package com.napier.sem;
 
 public class PopulationReport {
     public String Name;
-    public int TotalPopulation;
-    public int TotalPopulationInCities;
+    public long TotalPopulation;
+    public long TotalPopulationInCities;
     public double PercentageInCities;
-    public int TotalPopulationNotInCities;
+    public long TotalPopulationNotInCities;
     public double PercentageNotInCities;
 }
