@@ -24,6 +24,13 @@ public class PopulationReporting {
         populationReport23 = getPeopleLivingNotLivingInCitiesInEachContinent();
         printPopulationReport(populationReport23);
 
+        // Report 24 - People Living In/ Not Living In Cities In Each Region
+        System.out.println("Report 24 - People Living In/ Not Living In Cities In Each Region");
+        System.out.println("Parameters: None");
+        ArrayList<PopulationReport> populationReport24 = new ArrayList<PopulationReport>();
+        populationReport24 = getPeopleLivingNotLivingInCitiesInEachRegion();
+        printPopulationReport(populationReport24);
+
         // Report 25 - People Living/Not Living in Cities in each Country
         System.out.println("Report 25 - People Living/Not Living in Cities in each Country");
         System.out.println("Parameters: None");
@@ -89,6 +96,54 @@ public class PopulationReporting {
         }
     }
 
+
+    public ArrayList<PopulationReport> getPeopleLivingNotLivingInCitiesInEachRegion()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT  c.Region as Name "
+                            + ", Sum(distinct c.Population) as TotalPopulation "
+                            + ", Sum(ci.Population) as TotalPopulationInCities "
+                            + ", (Sum(ci.Population) / Sum(distinct c.Population)) PercentageInCities "
+                            + ", (Sum(distinct c.Population) - Sum(ci.Population)) TotalPopulationNotInCities "
+                            + ", (Sum(distinct c.Population)-Sum(ci.Population))/ Sum(distinct c.Population) PercentageNotInCities "
+                            + "FROM country c "
+                            + "LEFT JOIN city as ci "
+                            + "ON c.Code = ci.CountryCode "
+                            + "GROUP BY Region "
+                            + "ORDER BY TotalPopulation DESC";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            // Extract country information
+            ArrayList<PopulationReport> populationReports = new ArrayList<PopulationReport>();
+            while (rset.next())
+            {
+                PopulationReport populationReport = new PopulationReport();
+
+                populationReport.Name = rset.getString("Name");
+                populationReport.TotalPopulation = rset.getLong("TotalPopulation");
+                populationReport.TotalPopulationInCities = rset.getLong("TotalPopulationInCities");
+                populationReport.PercentageInCities = rset.getDouble("PercentageInCities");
+                populationReport.TotalPopulationNotInCities = rset.getLong("TotalPopulationNotInCities");
+                populationReport.PercentageNotInCities = rset.getDouble("PercentageNotInCities");
+                populationReports.add(populationReport);
+            }
+            return populationReports;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get details");
+            return null;
+        }
+    }
 
     public ArrayList<PopulationReport> getPeopleLivingNotLivingInCitiesInEachCountry()
     {
