@@ -45,6 +45,13 @@ public class CityReporting {
         cities05 = getCitiesForRegionByPopulation("Australia and New Zealand");
         printCities(cities05);
 
+        // Report 06 - The top N cities in the world
+        System.out.println("Report 06 - The top N populated cities in the world");
+        System.out.println("TopN = 5");
+        ArrayList<City> cities06 = new ArrayList<City>();
+        cities06 = getTopNCitiesInTheWorld(5);
+        printCities(cities06);
+
         // Report 16 - the top n populated cities in a district by population
         System.out.println("Report 16 - the top n populated cities in a district by population");
         System.out.println("Parameters: District = California, TopN=5");
@@ -226,6 +233,44 @@ public class CityReporting {
                             + "WHERE city.CountryCode = country.Code "
                             + "AND country.Region = '" + region + "'"
                             + "ORDER BY city.Population DESC";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract country information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next())
+            {
+                City city = new City();
+                city.Country = new Country();
+                city.Name = rset.getString("Name");
+                city.District = rset.getString("District");
+                city.Population = rset.getInt("Population");
+                city.Country.Name = rset.getString("Country");
+                cities.add(city);
+            }
+            return cities;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
+    public ArrayList<City> getTopNCitiesInTheWorld(int topN)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, country.Name Country, city.District, city.Population "
+                            + "FROM city, country "
+                            + "WHERE city.CountryCode = country.Code "
+                            + "ORDER BY city.Population DESC "
+                            + "LIMIT " + topN;
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
