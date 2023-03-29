@@ -38,6 +38,13 @@ public class PopulationReporting {
         populationReport25 = getPeopleLivingNotLivingInCitiesInEachCountry();
         printPopulationReport(populationReport25);
 
+        // Report 26 - Population of the World
+        System.out.println("Report 26 - Population of the World");
+        System.out.println("Parameters: None");
+        ArrayList<PopulationReport> populationReport26 = new ArrayList<PopulationReport>();
+        populationReport26 = getPopulationForTheWorld();
+        printPopulationReport(populationReport26);
+
         // Report 29 - Countries by population
         System.out.println("Report 29 - Population of a country");
         System.out.println("Parameters: country = Ireland");
@@ -231,6 +238,44 @@ public class PopulationReporting {
                 populationReport.PercentageInCities = rset.getDouble("PercentageInCities");
                 populationReport.TotalPopulationNotInCities = rset.getLong("TotalPopulationNotInCities");
                 populationReport.PercentageNotInCities = rset.getDouble("PercentageNotInCities");
+                populationReports.add(populationReport);
+            }
+            return populationReports;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get details");
+            return null;
+        }
+    }
+
+    public ArrayList<PopulationReport> getPopulationForTheWorld()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT SUM(Population) AS TotalPopulation FROM country";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            // Extract country information
+            ArrayList<PopulationReport> populationReports = new ArrayList<PopulationReport>();
+            while (rset.next())
+            {
+                PopulationReport populationReport = new PopulationReport();
+
+                populationReport.Name = "fakeName";
+                populationReport.TotalPopulation = rset.getLong("TotalPopulation");
+                populationReport.TotalPopulationInCities = 0;
+                populationReport.PercentageInCities = 0;
+                populationReport.TotalPopulationNotInCities = 0;
+                populationReport.PercentageNotInCities = 0;
                 populationReports.add(populationReport);
             }
             return populationReports;
