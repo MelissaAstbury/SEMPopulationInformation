@@ -19,6 +19,7 @@ public class AppTest
     static CountryReporting countryReporting;
     static CityReporting cityReporting;
     static LanguageReporting languageReporting;
+    static CapitalCityReporting capitalCityReporting;
 
     @BeforeAll
     static void init()
@@ -27,6 +28,7 @@ public class AppTest
         countryReporting = new CountryReporting();
         cityReporting = new CityReporting();
         languageReporting = new LanguageReporting();
+        capitalCityReporting = new CapitalCityReporting();
     }
 
     /**
@@ -129,5 +131,32 @@ public class AppTest
         languageReport.TotalPopulation = 100000;
         languageReports.add(languageReport);
         languageReporting.printLanguageReport(languageReports);
+    }
+
+    /**
+     Capital City Reporting Tests
+     */
+    @Test
+    void printCapitalCityReportsTestNull() { capitalCityReporting.printCapitalCities(null); }
+
+    @Test
+    void printCapitalCityReportsTestContainsNull()
+    {
+        ArrayList<City> capitalCityReports = new ArrayList<>();
+        capitalCityReports.add(null);
+        capitalCityReporting.printCapitalCities(capitalCityReports);
+    }
+
+    @Test
+    void printCapitalCityReportsValid()
+    {
+        ArrayList<City> capitalCityReports = new ArrayList<>();
+        City capitalCityReport = new City();
+        capitalCityReport.Country = new Country();
+        capitalCityReport.Name = "New York";
+        capitalCityReport.Country.Name = "America";
+        capitalCityReport.Population = 9999;
+        capitalCityReports.add(capitalCityReport);
+        capitalCityReporting.printCapitalCities(capitalCityReports);
     }
 }

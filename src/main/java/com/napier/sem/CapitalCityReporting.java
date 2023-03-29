@@ -306,9 +306,20 @@ public class CapitalCityReporting {
     {
         // Print header
         System.out.println(String.format("%-50s %-50s %-20s", "Name", "Country", "Population"));
-        // Loop over all countries in the list
+
+        // Check cities is not null
+        if (cities == null)
+        {
+            System.out.println("No cities");
+            return;
+        }
+
+        // Loop over all cities in the list
         for (City city : cities)
         {
+            if (city == null)
+                continue;
+
             String city_string =
                     String.format("%-50s %-50s %-20s",
                             city.Name, city.Country.Name, city.Population);
