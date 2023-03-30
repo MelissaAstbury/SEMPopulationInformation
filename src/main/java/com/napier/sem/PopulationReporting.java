@@ -255,9 +255,19 @@ public class PopulationReporting {
                 "Total Population (In Cities)", "% (In Cities)",
                 "Total Population (Not In Cities)", "% (Not In Cities)"));
 
+        // Check if population is not null
+        if (populationReports == null)
+        {
+            System.out.println("No population reports");
+            return;
+        }
+
         // Loop over all population items in the list
         for (PopulationReport populationReport : populationReports)
         {
+            if (populationReport == null)
+                continue;
+
             String population_string =
                     String.format("%-50s %-20s %-35s %-20s %-35s %-20s",
                             populationReport.Name,
