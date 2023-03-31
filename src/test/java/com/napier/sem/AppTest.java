@@ -20,6 +20,7 @@ public class AppTest
     static CityReporting cityReporting;
     static LanguageReporting languageReporting;
     static CapitalCityReporting capitalCityReporting;
+    static PopulationReporting populationReporting;
 
     @BeforeAll
     static void init()
@@ -29,6 +30,7 @@ public class AppTest
         cityReporting = new CityReporting();
         languageReporting = new LanguageReporting();
         capitalCityReporting = new CapitalCityReporting();
+        populationReporting = new PopulationReporting();
     }
 
     /**
@@ -158,5 +160,34 @@ public class AppTest
         capitalCityReport.Population = 9999;
         capitalCityReports.add(capitalCityReport);
         capitalCityReporting.printCapitalCities(capitalCityReports);
+    }
+
+    /**
+     Population Reporting Tests
+     */
+    @Test
+    void printPopulationReportsTestNull() { populationReporting.printPopulationReport(null); }
+
+    @Test
+    void printPopulationReportsTestContainsNull()
+    {
+        ArrayList<PopulationReport> populationReports = new ArrayList<>();
+        populationReports.add(null);
+        populationReporting.printPopulationReport(populationReports);
+    }
+
+    @Test
+    void printPopulationReportsValid()
+    {
+        ArrayList<PopulationReport> populationReports = new ArrayList<>();
+        PopulationReport populationReport = new PopulationReport();
+        populationReport.Name = "Ireland";
+        populationReport.TotalPopulation = 3775100;
+        populationReport.TotalPopulationInCities = 609041;
+        populationReport.PercentageInCities = 16.13;
+        populationReport.TotalPopulationNotInCities = 3166059;
+        populationReport.PercentageNotInCities = 83.87;
+        populationReports.add(populationReport);
+        populationReporting.printPopulationReport(populationReports);
     }
 }
