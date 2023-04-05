@@ -19,6 +19,7 @@ public class AppIntegrationTest
     static App app;
     static CountryReporting countryReporting;
     static CityReporting cityReporting;
+    static CapitalCityReporting capitalCityReporting;
     static LanguageReporting languageReporting;
     @BeforeAll
     static void init()
@@ -27,6 +28,7 @@ public class AppIntegrationTest
         app.connect("localhost:33060", 30000);
         countryReporting = new CountryReporting();
         cityReporting = new CityReporting();
+        capitalCityReporting = new CapitalCityReporting();
         languageReporting = new LanguageReporting();
     }
 
@@ -36,6 +38,9 @@ public class AppIntegrationTest
         app.disconnect();
     }
 
+    /**
+     * Integration test for Country reports
+     */
     @Test
     void testGetCountries()
     {
@@ -44,7 +49,9 @@ public class AppIntegrationTest
         Country country = countries.get(0);
         assertEquals(country.Name, "China");
     }
-
+    /**
+     * Integration test for City reports
+     */
     @Test
     void testGetCities()
     {
@@ -53,7 +60,20 @@ public class AppIntegrationTest
         City city = cities.get(0);
         assertEquals(city.Name, "Mumbai (Bombay)");
     }
-
+    /**
+     * Integration test for Capital City reports
+     */
+    @Test
+    void testGetCapitalCities()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        cities = capitalCityReporting.getCapitalCitiesByPopulation();
+        City city = cities.get(0);
+        assertEquals(city.Name, "Seoul");
+    }
+    /**
+     * Integration test for Language reports
+     */
     @Test
     void testGetLanguage(){
         ArrayList<LanguageReport> languageReports = new ArrayList<LanguageReport>();
@@ -62,5 +82,4 @@ public class AppIntegrationTest
         assertEquals(languageReports.size(), 5);
         assertTrue(chinaData.TotalPopulation < 2000000000);
     }
-
 }
