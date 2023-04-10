@@ -21,6 +21,8 @@ public class AppIntegrationTest
     static CityReporting cityReporting;
     static CapitalCityReporting capitalCityReporting;
     static LanguageReporting languageReporting;
+    static PopulationReporting populationReporting;
+
     @BeforeAll
     static void init()
     {
@@ -30,6 +32,7 @@ public class AppIntegrationTest
         cityReporting = new CityReporting();
         capitalCityReporting = new CapitalCityReporting();
         languageReporting = new LanguageReporting();
+        populationReporting = new PopulationReporting();
     }
 
     @AfterAll
@@ -71,6 +74,19 @@ public class AppIntegrationTest
         City city = cities.get(0);
         assertEquals(city.Name, "Seoul");
     }
+
+    /**
+     * Integration test for Population reports
+     */
+    @Test
+    void testGetPopulation()
+    {
+        ArrayList<PopulationReport> populationReports = new ArrayList<PopulationReport>();
+        populationReports = populationReporting.getPeopleLivingNotLivingInCitiesInEachContinent();
+        PopulationReport populationReport = populationReports.get(0);
+        assertEquals(populationReport.Name, "Asia");
+    }
+
     /**
      * Integration test for Language reports
      */
