@@ -57,13 +57,13 @@ The Kanban/Project Board can be accessed from [this link.](https://zube.io/napie
 | 20  | The top 'N' populated capital cities in the world where N is provided by the user                           | Yes | ![img.png](getTopNCapitalCitiesInTheWorld.png)                   |
 | 21  | The top 'N' populated capital cities in a continent where N is provided by the user                         | Yes | ![img.png](getTopNCapitalCitiesinaContinent.png)                 |
 | 22  | The top 'N' populated capital cities in a region where N is provided by the user                            | Yes | ![img.png](getTopNCapitalCitiesInARegion.png)                                              |
-| 23  | The population of people, people living in cities, and people not living in cities in each continent        | No | ![img.png](getPeopleLinvingAndNotLivingInCitiesPerContinent.png) |
-| 24  | The population of people, people living in cities, and people not living in cities in each region           | No | ![img.png](getPeopleLinvingAndNotLivingInCitiesPerRegion.png)    |
-| 25  | The population of people, people living in cities, and people not living in cities in each country          | No | ![img.png](getPeopleLivingNotLivingInCItiesPerCountry.png)       |
+| 23  | The population of people, people living in cities, and people not living in cities in each continent        | Yes | ![img.png](getPeopleLinvingAndNotLivingInCitiesPerContinent.png) |
+| 24  | The population of people, people living in cities, and people not living in cities in each region           | Yes | ![img.png](getPeopleLinvingAndNotLivingInCitiesPerRegion.png)    |
+| 25  | The population of people, people living in cities, and people not living in cities in each country          | Yes | ![img.png](getPeopleLivingNotLivingInCItiesPerCountry.png)       |
 | 26  | The population of the world                                                                                 | No | put your image here                                              |
 | 27  | The population of a continent                                                                               | No | put your image here                                              |
-| 28  | The population of a region                                                                                  | No | put your image here                                              |
-| 29  | The population of a country                                                                                 | Yes | ![img.png](getPopulationForCountry.PNG)                          |
+| 28  | The population of a region                                                                                  | Yes | ![img.png](getPeopleLivingNotLivingInCitiesInARegion.png)       |
+| 29  | The population of a country                                                                                 | Yes | ![img.png](getPopulationForCountry.PNG)                         |
 | 30  | The population of a district                                                                                | No | put your image here                                              |
 | 31  | The population of a city                                                                                    | No | put your image here                                              |
-| 32  | The number of people who speak Chinese, English, Hindi, Spanish and Arabic from greatest number to smallest | Yes | ![img.png](getLanguageByPopulation.PNG)                          |
+| 32  | The number of people who speak Chinese, English, Hindi, Spanish and Arabic from greatest number to smallest | Yes | ![img.png](getLanguageByPopulation.PNG)                         |
