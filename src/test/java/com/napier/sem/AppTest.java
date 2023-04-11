@@ -8,11 +8,19 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * <h1>A series of unit tests</h1>
+ * tests the integrity of data retrieval
+ */
+
 public class AppTest
 {
     static App app;
     static CountryReporting countryReporting;
     static CityReporting cityReporting;
+    static LanguageReporting languageReporting;
+    static CapitalCityReporting capitalCityReporting;
+    static PopulationReporting populationReporting;
 
     @BeforeAll
     static void init()
@@ -20,6 +28,9 @@ public class AppTest
         app = new App();
         countryReporting = new CountryReporting();
         cityReporting = new CityReporting();
+        languageReporting = new LanguageReporting();
+        capitalCityReporting = new CapitalCityReporting();
+        populationReporting = new PopulationReporting();
     }
 
     /**
@@ -94,5 +105,89 @@ public class AppTest
         city.Country.Name = "Australia";
         cities.add(city);
         cityReporting.printCities(cities);
+    }
+
+    /**
+     Language Reporting Tests
+     */
+    @Test
+    void printLanguageReportsTestNull()
+    {
+        languageReporting.printLanguageReport(null);
+    }
+    @Test
+    void printLanguageReportsTestContainsNull()
+    {
+        ArrayList<LanguageReport> languageReports = new ArrayList<LanguageReport>();
+        languageReports.add(null);
+        languageReporting.printLanguageReport(languageReports);
+    }
+
+    @Test
+    void printLanguageReportsValid()
+    {
+        ArrayList<LanguageReport> languageReports = new ArrayList<LanguageReport>();
+        LanguageReport languageReport = new LanguageReport();
+        languageReport.Language = "Gaelic";
+        languageReport.PercentageOfWorldPopulation = 0.0001;
+        languageReport.TotalPopulation = 100000;
+        languageReports.add(languageReport);
+        languageReporting.printLanguageReport(languageReports);
+    }
+
+    /**
+     Capital City Reporting Tests
+     */
+    @Test
+    void printCapitalCityReportsTestNull() { capitalCityReporting.printCapitalCities(null); }
+
+    @Test
+    void printCapitalCityReportsTestContainsNull()
+    {
+        ArrayList<City> capitalCityReports = new ArrayList<>();
+        capitalCityReports.add(null);
+        capitalCityReporting.printCapitalCities(capitalCityReports);
+    }
+
+    @Test
+    void printCapitalCityReportsValid()
+    {
+        ArrayList<City> capitalCityReports = new ArrayList<>();
+        City capitalCityReport = new City();
+        capitalCityReport.Country = new Country();
+        capitalCityReport.Name = "New York";
+        capitalCityReport.Country.Name = "America";
+        capitalCityReport.Population = 9999;
+        capitalCityReports.add(capitalCityReport);
+        capitalCityReporting.printCapitalCities(capitalCityReports);
+    }
+
+    /**
+     Population Reporting Tests
+     */
+    @Test
+    void printPopulationReportsTestNull() { populationReporting.printPopulationReport(null); }
+
+    @Test
+    void printPopulationReportsTestContainsNull()
+    {
+        ArrayList<PopulationReport> populationReports = new ArrayList<>();
+        populationReports.add(null);
+        populationReporting.printPopulationReport(populationReports);
+    }
+
+    @Test
+    void printPopulationReportsValid()
+    {
+        ArrayList<PopulationReport> populationReports = new ArrayList<>();
+        PopulationReport populationReport = new PopulationReport();
+        populationReport.Name = "Ireland";
+        populationReport.TotalPopulation = 3775100;
+        populationReport.TotalPopulationInCities = 609041;
+        populationReport.PercentageInCities = 16.13;
+        populationReport.TotalPopulationNotInCities = 3166059;
+        populationReport.PercentageNotInCities = 83.87;
+        populationReports.add(populationReport);
+        populationReporting.printPopulationReport(populationReports);
     }
 }
