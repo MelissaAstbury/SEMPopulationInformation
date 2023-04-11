@@ -38,6 +38,13 @@ public class PopulationReporting {
         populationReport25 = getPeopleLivingNotLivingInCitiesInEachCountry();
         printPopulationReport(populationReport25);
 
+        // Report 26 - The population of the world
+        System.out.println("Report 26 - The population of the world");
+        System.out.println("Parameters: None");
+        ArrayList<PopulationReport> populationReport26;
+        populationReport26 = getPopulationForTheWorld();
+        printPopulationReport(populationReport26);
+
         // Report 28 - People Living/Not Living in Cities in a region
         System.out.println("Report 28 - People Living/Not Living in Cities in a Region");
         System.out.println("Parameters: South America");
@@ -170,6 +177,53 @@ public class PopulationReporting {
                             + "JOIN (SELECT CountryCode, SUM(Population) AS TotalPopulationInCities "
                             + "FROM city "
                             + "GROUP BY CountryCode) cp ON cp.CountryCode = c.Code";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            // Extract country information
+            ArrayList<PopulationReport> populationReports = new ArrayList<PopulationReport>();
+            while (rset.next())
+            {
+                PopulationReport populationReport = new PopulationReport();
+
+                populationReport.Name = rset.getString("Name");
+                populationReport.TotalPopulation = rset.getLong("TotalPopulation");
+                populationReport.TotalPopulationInCities = rset.getLong("TotalPopulationInCities");
+                populationReport.PercentageInCities = rset.getDouble("PercentageInCities");
+                populationReport.TotalPopulationNotInCities = rset.getLong("TotalPopulationNotInCities");
+                populationReport.PercentageNotInCities = rset.getDouble("PercentageNotInCities");
+                populationReports.add(populationReport);
+            }
+            return populationReports;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get details");
+            return null;
+        }
+    }
+
+    // Report 26 - The population of the world
+    public ArrayList<PopulationReport> getPopulationForTheWorld()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT c.Name, c.Population AS TotalPopulation "
+                            + ", cp.TotalPopulationInCities "
+                            + ", (cp.TotalPopulationInCities / c.Population) PercentageInCities "
+                            + ", (c.Population - cp.TotalPopulationInCities) TotalPopulationNotInCities "
+                            + ", ((c.Population - cp.TotalPopulationInCities) / c.Population) PercentageNotInCities "
+                            + "FROM (SELECT 'World' Name, SUM(Population) Population "
+                            + "FROM country) c "
+                            + "JOIN (SELECT 'World' Name, SUM(city.Population) AS TotalPopulationInCities "
+                            + "FROM city) cp ON cp.Name = c.Name";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
