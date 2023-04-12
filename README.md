@@ -61,7 +61,7 @@ The Kanban/Project Board can be accessed from [this link.](https://zube.io/napie
 | 24  | The population of people, people living in cities, and people not living in cities in each region           | Yes | ![img.png](getPeopleLinvingAndNotLivingInCitiesPerRegion.png)    |
 | 25  | The population of people, people living in cities, and people not living in cities in each country          | Yes | ![img.png](getPeopleLivingNotLivingInCItiesPerCountry.png)       |
 | 26  | The population of the world                                                                                 | Yes | ![img.png](getPopulationOfTheWorld.png)                                              |
-| 27  | The population of a continent                                                                               | No | put your image here                                              |
+| 27  | The population of a continent                                                                               | Yes | ![img.png](getPopulationForContinent.png)                                              |
 | 28  | The population of a region                                                                                  | Yes | ![img.png](getPeopleLivingNotLivingInCitiesInARegion.png)       |
 | 29  | The population of a country                                                                                 | Yes | ![img.png](getPopulationForCountry.PNG)                         |
 | 30  | The population of a district                                                                                | No | put your image here                                              |
