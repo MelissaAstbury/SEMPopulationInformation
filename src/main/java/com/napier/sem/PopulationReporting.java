@@ -45,6 +45,13 @@ public class PopulationReporting {
         populationReport26 = getPopulationForTheWorld();
         printPopulationReport(populationReport26);
 
+        // Report 27 - The population of a continent
+        System.out.println("Report 27 - The population of a continent");
+        System.out.println("Parameters: Continent: Europe");
+        ArrayList<PopulationReport> populationReport27;
+        populationReport27 = getPopulationForContinent();
+        printPopulationReport(populationReport27);
+
         // Report 28 - People Living/Not Living in Cities in a region
         System.out.println("Report 28 - People Living/Not Living in Cities in a Region");
         System.out.println("Parameters: South America");
@@ -252,6 +259,55 @@ public class PopulationReporting {
         }
     }
 
+    // Report 27 - The population of a continent
+    public ArrayList<PopulationReport> getPopulationForContinent()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT c2.Name, c2.Population AS TotalPopulation "
+                            + ", cp.TotalPopulationInCities "
+                            + ", (cp.TotalPopulationInCities / c2.Population) PercentageInCities "
+                            + ", (c2.Population - cp.TotalPopulationInCities) TotalPopulationNotInCities "
+                            + ", ((c2.Population - cp.TotalPopulationInCities) / c2.Population) PercentageNotInCities "
+                            + "FROM (SELECT continent AS Name, SUM(Population) Population "
+                            + "FROM country "
+                            + "WHERE continent = 'Europe') c2 "
+                            + "JOIN (SELECT country.Continent AS Name, SUM(city.Population) TotalPopulationInCities "
+                            + "FROM city, country "
+                            + "WHERE city.CountryCode = country.Code "
+                            + "AND country.Continent = 'Europe') cp ON cp.Name = c2.Name";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            // Extract country information
+            ArrayList<PopulationReport> populationReports = new ArrayList<PopulationReport>();
+            while (rset.next())
+            {
+                PopulationReport populationReport = new PopulationReport();
+
+                populationReport.Name = rset.getString("Name");
+                populationReport.TotalPopulation = rset.getLong("TotalPopulation");
+                populationReport.TotalPopulationInCities = rset.getLong("TotalPopulationInCities");
+                populationReport.PercentageInCities = rset.getDouble("PercentageInCities");
+                populationReport.TotalPopulationNotInCities = rset.getLong("TotalPopulationNotInCities");
+                populationReport.PercentageNotInCities = rset.getDouble("PercentageNotInCities");
+                populationReports.add(populationReport);
+            }
+            return populationReports;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get details");
+            return null;
+        }
+    }
     // Report 28 - People Living/Not Living in Cities in a Region
     public ArrayList<PopulationReport> getPeopleLivingNotLivingInCitiesInARegion()
     {
