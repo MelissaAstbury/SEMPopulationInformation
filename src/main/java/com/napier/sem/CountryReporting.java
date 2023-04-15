@@ -33,6 +33,14 @@ public class CountryReporting {
         countries03 = getCountriesForRegion("Eastern Asia");
         printCountries(countries03);
 
+        // Report 04 - Retrieve the top 'N' populated countries in the world where N is provided by the user
+        System.out.println("Report 04 - The top 'N' populated countries in the world where N is provided by the user");
+        System.out.println("Parameters: Top N = 4 ");
+        ArrayList<Country> countries04;
+        countries04 = getTopNCountries(4);
+        printCountries(countries04);
+
+
         // Report 05 - Retrieve the top 'N' populated countries in a continent where N is provided by the user
         System.out.println("Report 05 - The top 'N' populated countries in a continent where N is provided by the user");
         System.out.println("Parameters: Top N Populated Countries = 5 | Continent: Europe");
@@ -166,6 +174,48 @@ public class CountryReporting {
         {
             System.out.println(e.getMessage());
             System.out.println("Failed to retrieve countries in a region");
+            return null;
+        }
+    }
+
+    // Report 04 - Retrieve the top 'N' populated countries in the world where N is provided by the user
+    public ArrayList<Country> getTopNCountries(int topN)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.Code, country.Name, country.Continent, country.Region, country.Population, city.Name as Capital "
+                            + "FROM country, city "
+                            + "WHERE country.capital = city.ID "
+                            + "ORDER BY country.Population DESC "
+                            + "LIMIT " + topN + "";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            // Extract country information
+            ArrayList<Country> countries = new ArrayList<Country>();
+            while (rset.next())
+            {
+                Country country = new Country();
+                country.Capital = new City();
+                country.Code = rset.getString("Code");
+                country.Name = rset.getString("Name");
+                country.Continent = rset.getString("Continent");
+                country.Region = rset.getString("Region");
+                country.Population = rset.getInt("Population");
+                country.Capital.Name = rset.getString("Capital");
+                countries.add(country);
+            }
+            return countries;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to retrieve top 'N' countries in a continent");
             return null;
         }
     }

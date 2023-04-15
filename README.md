@@ -38,7 +38,7 @@ The Kanban/Project Board can be accessed from [this link.](https://zube.io/napie
 | 1   | All the countries in the world organised by largest population to smallest                                  | Yes | ![img.png](getCountriesByPopulation.png)                         |
 | 2   | All the countries in a continent organised by largest population to smallest                                | Yes | ![img.png](getCountriesInAContinent.png)                         |
 | 3   | All the countries in a region organised by largest population to smallest                                   | Yes | ![img.png](getCountriesForRegion.png)                            |
-| 4   | The top 'N' populated countries in the world where N is provided by the user                                | No  | put your image here                                              |
+| 4   | The top 'N' populated countries in the world where N is provided by the user                                | Yes | ![img.png](getTopNCountriesByPopulation.png)                     |
 | 5   | The top 'N' populated countries in a continent where N is provided by the user                              | Yes | ![img.png](getTopNCountriesInAContinent.png)                     |
 | 6   | The top 'N' populated countries in a region where N is provided by the user                                 | Yes | ![img.png](getTopNCountriesInARegion.png)                        |
 | 7   | All the cities in the world organised by largest population to smallest                                     | Yes | ![img.png](getCitiesByPopulation.png)                            |

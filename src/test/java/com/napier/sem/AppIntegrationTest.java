@@ -52,6 +52,17 @@ public class AppIntegrationTest
         Country country = countries.get(0);
         assertEquals(country.Name, "China");
     }
+    @Test
+    void testGetTopNCountries()
+    {
+        ArrayList<Country> countries = new ArrayList<Country>();
+        countries = countryReporting.getTopNCountries(8);
+        Country country = countries.get(0);
+        assertEquals(country.Name, "China");
+        assertEquals(countries.size(), 8);
+
+    }
+
     /**
      * Integration test for City reports
      */
