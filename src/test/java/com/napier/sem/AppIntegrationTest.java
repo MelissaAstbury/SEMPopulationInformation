@@ -85,6 +85,16 @@ public class AppIntegrationTest
         cityReporting.printCities(cities);
     }
 
+    @Test
+    void testGetCitiesInRegionByPopulation()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        cities = cityReporting.getTopNCitiesForRegionByPopulation("Eastern Asia",2);
+        //City city = cities.get(0);
+        assertEquals(cities.size(),2);
+        cityReporting.printCities(cities);
+    }
+
     /**
      * Integration test for Capital City reports
      */
