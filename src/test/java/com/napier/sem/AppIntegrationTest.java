@@ -63,6 +63,17 @@ public class AppIntegrationTest
         City city = cities.get(0);
         assertEquals(city.Name, "Mumbai (Bombay)");
     }
+
+    @Test
+    void testGetCitiesInContinentByPopulation()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        cities = cityReporting.getTopNCitiesForContinentByPopulation("Africa",2);
+        //City city = cities.get(0);
+        assertEquals(cities.size(),2);
+        cityReporting.printCities(cities);
+    }
+
     /**
      * Integration test for Capital City reports
      */
