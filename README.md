@@ -32,6 +32,7 @@ The Kanban/Project Board can be accessed from [this link.](https://zube.io/napie
 ---
 # Queries for Code Review 2
 **Please note these are only snapshots. Some queries were too big to capture all results in the screenshots**
+> Reports done: 32/32 = 100%
 
 | ID  | Name                                                                                                        | Met | Screenshot                                                       |
 |-----|-------------------------------------------------------------------------------------------------------------|-----|------------------------------------------------------------------|
