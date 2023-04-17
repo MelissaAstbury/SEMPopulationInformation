@@ -107,6 +107,35 @@ public class AppTest
         cityReporting.printCities(cities);
     }
 
+    @Test
+    void printCityReportsValid2()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        City city = new City();
+        city.Name = "Livingston";
+        city.District = "West Lothian";
+        city.Population = 10;
+        city.Country = new Country();
+        city.Country.Name = "Scotland";
+        cities.add(city);
+        cityReporting.printCities(cities);
+    }
+
+    @Test
+    void printCityReportsValid3()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        City city = new City();
+        city.Name = "Edinburgh";
+        city.District = "MidLothian";
+        city.Population = 10;
+        city.Country = new Country();
+        city.Country.Name = "Scotland";
+        cities.add(city);
+        cityReporting.printCities(cities);
+    }
+
+
     /**
      Language Reporting Tests
      */

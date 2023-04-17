@@ -52,9 +52,19 @@ public class CityReporting {
         cities06 = getTopNCitiesInTheWorld(5);
         printCities(cities06);
 
-        // Report 13 - The top 'N' populated cities in a region where N is provided by the user
+        // Report 13 - the top n populated cities in a continent by population
+        System.out.println("Report 13 - the top n populated cities in a continent by population");
+        System.out.println("Parameters: Continent = Europe, TopN=5");
+        ArrayList<City> cities13;
+        cities13 = getTopNCitiesForContinentByPopulation("Europe",5);
+        printCities(cities13);
 
-        // Report 14 - The top 'N' populated cities in a country where N is provided by the user
+        // Report 14 - The top 'N' populated cities in a region where N is provided by the user
+        System.out.println("Report 14 - The top 'N' populated cities in a region where N is provided by the user");
+        System.out.println("Parameters: Region = Eastern Asia, TopN=5");
+        ArrayList<City> cities14;
+        cities14 = getTopNCitiesForRegionByPopulation("Eastern Asia",5);
+        printCities(cities14);
 
         //Report 15 - The top 'N' populated cities in a country where N is provided by the user
         System.out.println("//Report 15 - The top 'N' populated cities in a country where N is provided by the user");
@@ -306,7 +316,90 @@ public class CityReporting {
 
     // Report 13 - The top 'N' populated cities in a continent where N is provided by the user
 
+    public ArrayList<City> getTopNCitiesForContinentByPopulation(String continent, int topn)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, country.Name Country, city.District, city.Population "
+                            + "FROM city, country "
+                            + "WHERE city.CountryCode = country.Code "
+                            + "AND country.Continent = '" + continent + "'"
+                            + "ORDER BY city.Population DESC "
+                            + "LIMIT " + topn;
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract country information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next())
+            {
+                City city = new City();
+                Country country = new Country();
+                city.Country = new Country();
+                city.Name = rset.getString("Name");
+                city.District = rset.getString("District");
+                city.Population = rset.getInt("Population");
+                city.Country.Name = rset.getString("Country");
+                cities.add(city);
+            }
+            return cities;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
+
+
     // Report 14 - The top 'N' populated cities in a region where N is provided by the user
+
+    public ArrayList<City> getTopNCitiesForRegionByPopulation(String region, int topn)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, country.Name Country, city.District, city.Population "
+                            + "FROM city, country "
+                            + "WHERE city.CountryCode = country.Code "
+                            + "AND country.Region = '" + region + "'"
+                            + "ORDER BY city.Population DESC "
+                            + "LIMIT " + topn;
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract country information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next())
+            {
+                City city = new City();
+                Country country = new Country();
+                city.Country = new Country();
+                city.Name = rset.getString("Name");
+                city.District = rset.getString("District");
+                city.Population = rset.getInt("Population");
+                city.Country.Name = rset.getString("Country");
+                cities.add(city);
+            }
+            return cities;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
 
     //Report 15 - The top 'N' populated cities in a country where N is provided by the user
     public ArrayList<City> getTopNCitiesForCountryByPopulation(String country, int topN)

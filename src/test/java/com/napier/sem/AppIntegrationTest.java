@@ -52,6 +52,17 @@ public class AppIntegrationTest
         Country country = countries.get(0);
         assertEquals(country.Name, "China");
     }
+    @Test
+    void testGetTopNCountries()
+    {
+        ArrayList<Country> countries = new ArrayList<Country>();
+        countries = countryReporting.getTopNCountries(8);
+        Country country = countries.get(0);
+        assertEquals(country.Name, "China");
+        assertEquals(countries.size(), 8);
+
+    }
+
     /**
      * Integration test for City reports
      */
@@ -63,6 +74,27 @@ public class AppIntegrationTest
         City city = cities.get(0);
         assertEquals(city.Name, "Mumbai (Bombay)");
     }
+
+    @Test
+    void testGetCitiesInContinentByPopulation()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        cities = cityReporting.getTopNCitiesForContinentByPopulation("Africa",2);
+        //City city = cities.get(0);
+        assertEquals(cities.size(),2);
+        cityReporting.printCities(cities);
+    }
+
+    @Test
+    void testGetCitiesInRegionByPopulation()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        cities = cityReporting.getTopNCitiesForRegionByPopulation("Eastern Asia",2);
+        //City city = cities.get(0);
+        assertEquals(cities.size(),2);
+        cityReporting.printCities(cities);
+    }
+
     /**
      * Integration test for Capital City reports
      */
