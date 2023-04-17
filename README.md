@@ -65,5 +65,5 @@ The Kanban/Project Board can be accessed from [this link.](https://zube.io/napie
 | 28  | The population of a region                                                                                  | Yes | ![img.png](getPeopleLivingNotLivingInCitiesInARegion.png)        |
 | 29  | The population of a country                                                                                 | Yes | ![img.png](getPopulationForCountry.PNG)                          |
 | 30  | The population of a district                                                                                | Yes | ![img.png](getPopupationOfADistrict.png)                         |
-| 31  | The population of a city                                                                                    | No  | put your image here                                              |
+| 31  | The population of a city                                                                                    | Yes | ![img.png](getPopulationOfACity.png)                             |
 | 32  | The number of people who speak Chinese, English, Hindi, Spanish and Arabic from greatest number to smallest | Yes | ![img.png](getLanguageByPopulation.PNG)                          |
