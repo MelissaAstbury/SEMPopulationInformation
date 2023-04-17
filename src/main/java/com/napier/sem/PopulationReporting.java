@@ -65,6 +65,13 @@ public class PopulationReporting {
         ArrayList<PopulationReport> populationReport29 = new ArrayList<PopulationReport>();
         populationReport29 = getPopulationForCountry("Ireland");
         printPopulationReport(populationReport29);
+
+        // Report 30 - The population of a district
+        System.out.println("Report 30 - The population of a district");
+        System.out.println("Parameters: district = Kabol");
+        ArrayList<PopulationReport> populationReport30 = new ArrayList<PopulationReport>();
+        populationReport30 = getPopulationOfADistrict("Kabol");
+        printPopulationReport(populationReport30);
     }
 
     // Report 23 - People Living In/ Not Living In Cities In Each Continent
@@ -384,6 +391,54 @@ public class PopulationReporting {
                         + "      GROUP BY CountryCode) cp ON cp.CountryCode = c.Code "
                         + "WHERE c.Name = '" + country + "'";
 
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            // Extract country information
+            ArrayList<PopulationReport> populationReports = new ArrayList<PopulationReport>();
+            while (rset.next())
+            {
+                PopulationReport populationReport = new PopulationReport();
+
+                populationReport.Name = rset.getString("Name");
+                populationReport.TotalPopulation = rset.getLong("TotalPopulation");
+                populationReport.TotalPopulationInCities = rset.getLong("TotalPopulationInCities");
+                populationReport.PercentageInCities = rset.getDouble("PercentageInCities");
+                populationReport.TotalPopulationNotInCities = rset.getLong("TotalPopulationNotInCities");
+                populationReport.PercentageNotInCities = rset.getDouble("PercentageNotInCities");
+                populationReports.add(populationReport);
+            }
+            return populationReports;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get details");
+            return null;
+        }
+    }
+
+    // Report 30 - Population of a district
+    public ArrayList<PopulationReport> getPopulationOfADistrict(String district)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT  ci.district as Name "
+                            + ", Sum(distinct ci.Population) as TotalPopulation "
+                            + ", Sum(ci.Population) as TotalPopulationInCities "
+                            + ", (Sum(ci.Population) / Sum(distinct ci.Population)) PercentageInCities "
+                            + ", (Sum(distinct ci.Population) - Sum(ci.Population)) TotalPopulationNotInCities "
+                            + ", (Sum(distinct ci.Population)-Sum(ci.Population))/ Sum(distinct c.Population) PercentageNotInCities "
+                            + "FROM country c "
+                            + "LEFT JOIN city as ci "
+                            + "ON c.Code = ci.CountryCode "
+                            + "WHERE ci.district = '" + district + "'";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
